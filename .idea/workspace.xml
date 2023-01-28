@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/ArgumentParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/commands/PublicCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/ModuleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/ModuleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandArgumentParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/ExecutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/ExecutionInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/JDAHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/JDAHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tk/vnvna/sodini/discord/helper/TestCommandArgParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tk/vnvna/sodini/discord/helper/TestCommandArgParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,19 +49,26 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2KuDBeZUzY7x7AVgS27A94Er6N6" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "/home/kyune/ws/vn-vna/sodini/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Java",
     "vue.rearranger.settings.migration": "true"
@@ -119,6 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1674815439795</updated>
       <workItem from="1674815440884" duration="32167000" />
+      <workItem from="1674907980539" duration="3620000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -148,6 +162,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initialize" />
     <MESSAGE value="Update .gitignore" />
     <MESSAGE value="Update codebase for command handling" />
@@ -157,9 +172,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/ArgumentParser.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

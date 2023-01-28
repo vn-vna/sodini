@@ -1,7 +1,8 @@
 package tk.vnvna.sodini.discord.helper;
 
 import lombok.Getter;
-import tk.vnvna.sodini.app.EntryPoint;
+import net.dv8tion.jda.api.events.Event;
+import tk.vnvna.sodini.module.ArgumentParser;
 import tk.vnvna.sodini.module.CommandLoader;
 
 import java.util.Objects;
@@ -14,17 +15,18 @@ public class CommandMatcher {
 
   @Getter
   private final String commandString;
+  private final Event triggeredEvent;
+  private ExecutionInfo executionInfo = null;
+  private ArgumentParser argumentParser;
 
-  public CommandMatcher(String commandString) {
-    this.commandLoader = EntryPoint.getInstance()
-        .getModuleController()
-        .getModule(CommandLoader.class);
-
+  public CommandMatcher(ArgumentParser argumentParser, CommandLoader commandLoader, String commandString, Event event) {
+    this.commandLoader = commandLoader;
+    this.triggeredEvent = event;
     this.commandString = commandString;
+    this.argumentParser = argumentParser;
   }
 
   public Optional<ExecutionInfo> matchCommand() {
-    ExecutionInfo executionInfo = null;
 
     for (var commandEntry : commandLoader.getCommands().entrySet()) {
       if (Objects.nonNull(executionInfo)) {
@@ -43,10 +45,10 @@ public class CommandMatcher {
       var argString = commandString.equals(commandEntry.getKey()) ?
           "" :
           commandString.substring(executionInfo.getCommandProperties().getMatchString().length() + 1);
-      var argParser = new CommandArgumentParser(argString);
-      var argArray = argParser.parse();
+      var argArray = argumentParser.parse(argString);
 
       executionInfo.setCommandArguments(argArray);
+      executionInfo.setTriggerEvent(triggeredEvent);
     }
 
 

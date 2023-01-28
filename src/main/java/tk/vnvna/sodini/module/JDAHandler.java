@@ -38,12 +38,14 @@ public class JDAHandler implements AppService {
       throw new IllegalArgumentException("Bot token is not found");
     }
 
-    JDABuilder builder = JDABuilder.create(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
+    JDABuilder builder = JDABuilder.create(
+        token,
+        GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
 
     moduleController.getModules().forEach((k, v) -> {
       if (ListenerAdapter.class.isAssignableFrom(k)) {
         builder.addEventListeners(v);
-        logger.info("Detected and assigned listener {} to JDA", k.getSimpleName());
+        logger.debug("Detected and assigned listener {} to JDA", k.getSimpleName());
       }
     });
 

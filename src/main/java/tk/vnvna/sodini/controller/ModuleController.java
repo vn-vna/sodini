@@ -20,6 +20,7 @@ public class ModuleController {
 
   @Getter
   protected Map<Class<?>, Object> modules;
+
   @Getter
   protected Logger logger;
 
@@ -39,14 +40,13 @@ public class ModuleController {
           try {
             var constructor = c.getDeclaredConstructor();
             return constructor.newInstance();
-          } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                   InvocationTargetException e) {
+          } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                   | InvocationTargetException e) {
             throw new RuntimeException(e);
           }
         }));
 
-
-    logger.info("Loaded {} module(s) from project", modules.size());
+    logger.debug("Loaded {} module(s) from project", modules.size());
   }
 
   public void invokeEntries() {
@@ -90,20 +90,24 @@ public class ModuleController {
 
             if (f.getType().equals(Logger.class)) {
               forceSetValue(f, v, LoggerFactory.getLogger(k));
-              logger.info("Appended logger to dependency {}", k.getSimpleName());
+              logger.debug(
+                  "Injected logger to dependency {}",
+                  k.getSimpleName());
               return;
             }
 
             if (f.getType().equals(ModuleController.class)) {
               forceSetValue(f, v, this);
-              logger.debug("Appended module controller to dependency {}", k.getSimpleName());
+              logger.debug(
+                  "Injected module controller to dependency {}",
+                  k.getSimpleName());
               return;
             }
 
             var module = this.getModule(f.getType());
             forceSetValue(f, v, module);
 
-            logger.info(
+            logger.debug(
                 "Injected module instance {} to {} with field {}",
                 module.getClass().getSimpleName(),
                 k.getSimpleName(),
@@ -114,9 +118,10 @@ public class ModuleController {
 
   private void forceSetValue(Field f, Object o, Object val) {
     try {
+      var prevAccess = f.canAccess(o);
       f.setAccessible(true);
       f.set(o, val);
-      f.setAccessible(f.canAccess(o));
+      f.setAccessible(prevAccess);
     } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }

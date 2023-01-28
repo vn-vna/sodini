@@ -1,28 +1,29 @@
 package tk.vnvna.sodini.module;
 
 import lombok.Getter;
-import org.reflections.Reflections;
 import org.slf4j.Logger;
+import tk.vnvna.sodini.controller.ModuleController;
 import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
 import tk.vnvna.sodini.controller.annotations.ModuleEntry;
 import tk.vnvna.sodini.discord.annotations.CommandGroup;
 import tk.vnvna.sodini.discord.annotations.CommandMethod;
 import tk.vnvna.sodini.discord.helper.CommandBase;
-import tk.vnvna.sodini.discord.helper.CommandMatcher;
 import tk.vnvna.sodini.discord.helper.CommandProperties;
 import tk.vnvna.sodini.utils.StringUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @AppModule
 public class CommandLoader {
-  public static final String COMMAND_PACKAGE = "tk.vnvna.sodini.discord.commands";
+  @Dependency
+  private Logger logger;
+
+  @Dependency
+  private ModuleController moduleController;
 
   @Getter
   private HashMap<String, CommandProperties> commands;
@@ -30,31 +31,31 @@ public class CommandLoader {
   @Getter
   private Map<Class<? extends CommandBase>, CommandBase> commandGroups;
 
-  @Dependency
-  private Logger logger;
-
   @ModuleEntry
   public void loadCommands() {
     commands = new HashMap<>();
+    commandGroups = new HashMap<>();
+
     loadGroups();
     loadMethods();
   }
 
   private void loadGroups() {
-    Reflections reflections = new Reflections(COMMAND_PACKAGE);
 
-    commandGroups = reflections.getTypesAnnotatedWith(CommandGroup.class)
-        .stream()
-        .filter(CommandBase.class::isAssignableFrom)
-        .collect(Collectors.toMap((c) -> (Class<? extends CommandBase>) c, (c) -> {
-          try {
-            var constructor = c.getDeclaredConstructor();
-            return (CommandBase) constructor.newInstance();
-          } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                   InvocationTargetException e) {
-            throw new RuntimeException(e);
-          }
-        }));
+    moduleController.getModules().forEach((k, v) -> {
+      var commandGroupAnnotation = k.getAnnotation(CommandGroup.class);
+
+      if (Objects.isNull(commandGroupAnnotation)) {
+        return;
+      }
+
+      if (!CommandBase.class.isAssignableFrom(k)) {
+        return;
+      }
+
+      commandGroups.put((Class<? extends CommandBase>) k, (CommandBase) v);
+      logger.debug("Detected command group {}", k.getSimpleName());
+    });
   }
 
   private void loadMethods() {
@@ -67,7 +68,8 @@ public class CommandLoader {
             commandProps.setCommandMethod(m);
 
             var commandName = m.getAnnotation(CommandMethod.class).value();
-            var matchString = StringUtils.joinNonBlanks(" ", commandProps.getCommandGroup().getGroupMatcher(), commandName);
+            var matchString = StringUtils.joinNonBlanks(" ", commandProps.getCommandGroup().getGroupMatcher(),
+                commandName);
             commandProps.setMatchString(matchString);
 
             commands.put(matchString, commandProps);

@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface BotPermission {
-  Permission[] value() default  {};
+  Permission[] value() default {};
 }

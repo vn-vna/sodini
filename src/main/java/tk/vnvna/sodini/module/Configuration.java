@@ -6,7 +6,6 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
-import tk.vnvna.sodini.controller.annotations.ModuleEntry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

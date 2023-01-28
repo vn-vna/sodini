@@ -8,7 +8,9 @@ import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
 import tk.vnvna.sodini.controller.annotations.ModuleEntry;
 import tk.vnvna.sodini.discord.helper.CommandMatcher;
+import tk.vnvna.sodini.module.ArgumentParser;
 import tk.vnvna.sodini.module.CommandExecutor;
+import tk.vnvna.sodini.module.CommandLoader;
 import tk.vnvna.sodini.module.Configuration;
 
 @AppModule
@@ -19,6 +21,12 @@ public class MessageListener extends ListenerAdapter {
 
   @Dependency
   private CommandExecutor commandExecutor;
+
+  @Dependency
+  private CommandLoader commandLoader;
+
+  @Dependency
+  private ArgumentParser commandArgumentParser;
 
   @Getter
   private String commandPrefix;
@@ -35,7 +43,12 @@ public class MessageListener extends ListenerAdapter {
     var rawContent = event.getMessage().getContentRaw();
     if (rawContent.startsWith(commandPrefix)) {
       var commandString = rawContent.substring(2);
-      var commandMatcher = new CommandMatcher(commandString);
+      var commandMatcher = new CommandMatcher(
+          commandArgumentParser,
+          commandLoader,
+          commandString,
+          event);
+
       commandMatcher.matchCommand()
           .ifPresent((executionInfo -> {
             commandExecutor.executeCommand(executionInfo);
