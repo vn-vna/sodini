@@ -40,7 +40,9 @@ public class CommandMatcher {
       executionInfo = new ExecutionInfo();
       executionInfo.setCommandProperties(commandEntry.getValue());
 
-      var argString = commandString.substring(executionInfo.getCommandProperties().getMatchString().length() + 1);
+      var argString = commandString.equals(commandEntry.getKey()) ?
+          "" :
+          commandString.substring(executionInfo.getCommandProperties().getMatchString().length() + 1);
       var argParser = new CommandArgumentParser(argString);
       var argArray = argParser.parse();
 

@@ -38,12 +38,6 @@ public class CommandLoader {
     commands = new HashMap<>();
     loadGroups();
     loadMethods();
-
-    var c = new CommandMatcher("public static void ping some-params another-param");
-    c.matchCommand()
-        .ifPresent((eif) -> {
-          System.out.println(eif);
-        });
   }
 
   private void loadGroups() {

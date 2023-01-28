@@ -3,6 +3,6 @@
 <Configuration>
     <Discord>
         <Token>Secret</Token>
-        <Prefix></Prefix>
+        <Prefix>Prefix of the command</Prefix>
     </Discord>
 </Configuration>

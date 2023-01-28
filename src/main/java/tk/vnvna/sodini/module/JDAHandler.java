@@ -3,8 +3,10 @@ package tk.vnvna.sodini.module;
 import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.slf4j.Logger;
+import tk.vnvna.sodini.controller.ModuleController;
 import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
 import tk.vnvna.sodini.controller.helper.AppService;
@@ -22,6 +24,9 @@ public class JDAHandler implements AppService {
   @Dependency
   private Configuration configuration;
 
+  @Dependency
+  private ModuleController moduleController;
+
   @Getter
   private JDA jda;
 
@@ -34,6 +39,13 @@ public class JDAHandler implements AppService {
     }
 
     JDABuilder builder = JDABuilder.create(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
+
+    moduleController.getModules().forEach((k, v) -> {
+      if (ListenerAdapter.class.isAssignableFrom(k)) {
+        builder.addEventListeners(v);
+        logger.info("Detected and assigned listener {} to JDA", k.getSimpleName());
+      }
+    });
 
     jda = builder.build();
   }

@@ -94,6 +94,12 @@ public class ModuleController {
               return;
             }
 
+            if (f.getType().equals(ModuleController.class)) {
+              forceSetValue(f, v, this);
+              logger.debug("Appended module controller to dependency {}", k.getSimpleName());
+              return;
+            }
+
             var module = this.getModule(f.getType());
             forceSetValue(f, v, module);
 

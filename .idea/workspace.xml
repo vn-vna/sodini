@@ -4,31 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Initialize">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/annotations/ModuleEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/BotPermission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/CommandGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/CommandMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/UserPermission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandArgumentParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/ExecutionInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/ExecutionResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/listeners/MessageListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/StringUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/Tokenizer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/tk/vnvna/sodini/discord/helper/TestCommandArgParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/app/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/app/EntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/ModuleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/controller/ModuleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/commands/PublicCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/CommandLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/JDAHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/JDAHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sodini.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini.xml" afterDir="false" />
@@ -83,7 +66,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TestCommandArgParser.Test">
+  <component name="RunManager" selected="Application.EntryPoint">
     <configuration name="EntryPoint" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tk.vnvna.sodini.app.EntryPoint" />
       <module name="sodini.main" />
@@ -135,7 +118,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674815439795</updated>
-      <workItem from="1674815440884" duration="30373000" />
+      <workItem from="1674815440884" duration="32167000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -144,7 +127,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674828446147</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update .gitignore">
+      <created>1674898116804</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674898116804</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update codebase for command handling">
+      <created>1674898177716</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1674898177716</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,25 +149,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialize" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialize" />
+    <MESSAGE value="Update .gitignore" />
+    <MESSAGE value="Update codebase for command handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update codebase for command handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/Configuration.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helper/CommandMatcher.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/tk/vnvna/sodini/discord/helper/TestCommandArgParser.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="19" />
+          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/module/listeners/MessageListener.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
