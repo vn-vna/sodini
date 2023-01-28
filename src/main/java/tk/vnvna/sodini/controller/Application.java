@@ -18,6 +18,7 @@ public class Application {
   }
 
   public void start() {
+    moduleController.invokeEntries();
     moduleController.startServices();
   }
 }

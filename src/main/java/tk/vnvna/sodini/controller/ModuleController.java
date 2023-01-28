@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
+import tk.vnvna.sodini.controller.annotations.ModuleEntry;
 import tk.vnvna.sodini.controller.helper.AppService;
 
 import java.lang.reflect.Field;
@@ -43,7 +44,37 @@ public class ModuleController {
             throw new RuntimeException(e);
           }
         }));
+
+
     logger.info("Loaded {} module(s) from project", modules.size());
+  }
+
+  public void invokeEntries() {
+    modules.forEach((clazz, module) -> {
+      var invocations = Arrays.stream(clazz.getDeclaredMethods())
+          .filter((m) -> Objects.nonNull(m.getAnnotation(ModuleEntry.class)))
+          .toList();
+
+      if (invocations.size() == 0) {
+        return;
+      }
+
+      if (invocations.size() > 1) {
+        throw new IllegalCallerException("A single module cannot have more than one invocation method");
+      }
+
+      var invocationMethod = invocations.get(0);
+
+      if (invocationMethod.getParameterTypes().length > 0) {
+        throw new IllegalCallerException("An invocation method cannot have any parameter");
+      }
+
+      try {
+        invocationMethod.invoke(module);
+      } catch (IllegalAccessException | InvocationTargetException e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
   private void autoInject() {

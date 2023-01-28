@@ -34,5 +34,7 @@ public class JDAHandler implements AppService {
     }
 
     JDABuilder builder = JDABuilder.create(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
+
+    jda = builder.build();
   }
 }

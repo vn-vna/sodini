@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Configuration>
-
+    <Discord>
+        <Token>Secret</Token>
+        <Prefix></Prefix>
+    </Discord>
 </Configuration>

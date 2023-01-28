@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import tk.vnvna.sodini.controller.annotations.AppModule;
 import tk.vnvna.sodini.controller.annotations.Dependency;
+import tk.vnvna.sodini.controller.annotations.ModuleEntry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,13 +22,10 @@ public class Configuration {
   @Dependency
   private Logger logger;
 
-  private Element root;
-
-  public Configuration() {
-    reload();
-  }
+  private Element root = null;
 
   public void reload() {
+    logger.info("Application requested to reload configuration from file {}", CFG_FILE);
     try (var fis = Configuration.class.getResourceAsStream(CFG_FILE)) {
       DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
@@ -43,7 +41,19 @@ public class Configuration {
     }
   }
 
+  private void reloadGuard() {
+    if (Objects.isNull(root)) {
+      synchronized (Configuration.class) {
+        if (Objects.isNull(root)) {
+          reload();
+        }
+      }
+    }
+  }
+
   public String getConfiguration(String pattern) {
+    reloadGuard();
+
     Element crrElem = this.root;
 
     String[] paths = pattern.split("::");
