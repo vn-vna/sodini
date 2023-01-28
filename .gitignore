@@ -42,4 +42,4 @@ bin/
 .DS_Store
 
 ### Config file ###
-sodini.xml
+src/main/resources/sodini.xml
