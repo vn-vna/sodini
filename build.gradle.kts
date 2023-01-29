@@ -11,29 +11,36 @@ repositories {
 
 dependencies {
     // JUnit Test
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = "5.8.1")
+    testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = "5.8.1")
 
     // JDA
-    implementation("net.dv8tion:JDA:5.0.0-beta.3")
+    implementation(group = "net.dv8tion", name = "JDA", version = "5.0.0-beta.3")
 
     // Lombok
-    compileOnly("org.projectlombok:lombok:1.18.24")
-    annotationProcessor("org.projectlombok:lombok:1.18.24")
-    testCompileOnly("org.projectlombok:lombok:1.18.24")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
+    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.24")
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.24")
+    testCompileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.24")
+    testAnnotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.24")
 
     // Reflections
-    implementation("org.reflections:reflections:0.10.2")
+    implementation(group = "org.reflections", name = "reflections", version = "0.10.2")
 
     // Json
-    implementation("org.json:json:20220924")
+    implementation(group = "org.json", name = "json", version = "20220924")
 
     // SLF4J
     implementation(group = "org.apache.logging.log4j", name = "log4j-api", version = "2.1")
     implementation(group = "org.apache.logging.log4j", name = "log4j-core", version = "2.3.2")
     implementation(group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version = "2.1")
 
+    // Glassfish Jersey
+    implementation(group = "org.glassfish.jersey.inject", name = "jersey-hk2", version = "3.1.0")
+    implementation(group = "org.glassfish.jersey.core", name = "jersey-client", version = "3.1.0")
+    implementation(group = "org.glassfish.jersey.media", name = "jersey-media-json-jackson", version = "3.1.0")
+
+    // Manifold EXT
+    compileOnly(group = "systems.manifold", name = "manifold-ext", version = "2022.1.38")
 }
 
 tasks.getByName<Test>("test") {

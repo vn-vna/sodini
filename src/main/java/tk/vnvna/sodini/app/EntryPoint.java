@@ -1,11 +1,11 @@
 package tk.vnvna.sodini.app;
 
-import tk.vnvna.sodini.controller.Application;
-import tk.vnvna.sodini.controller.annotations.ModuleRoot;
+import tk.vnvna.sodini.controllers.Application;
+import tk.vnvna.sodini.controllers.annotations.ModuleRoot;
 
 import java.util.Objects;
 
-@ModuleRoot("tk.vnvna.sodini.module")
+@ModuleRoot("tk.vnvna.sodini.modules")
 public class EntryPoint extends Application {
   private static EntryPoint instance = null;
 
