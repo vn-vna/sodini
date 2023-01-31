@@ -30,9 +30,22 @@ public class JDAHandler implements AppService {
   @Getter
   private JDA jda;
 
+  private void buildSlashCommand(JDABuilder builder) {
+
+  }
+
+  private void loadListeners(JDABuilder builder) {
+    moduleController.getModules().forEach((k, v) -> {
+      if (ListenerAdapter.class.isAssignableFrom(k)) {
+        builder.addEventListeners(v);
+        logger.debug("Detected and assigned listener {} to JDA", k.getSimpleName());
+      }
+    });
+  }
+
   @Override
   public void awake() {
-    var token = configuration.getConfiguration("Discord::Token");
+    var token = configuration.requireConfiguration("Discord::Token");
 
     if (Objects.isNull(token) || token.isBlank()) {
       throw new IllegalArgumentException("Bot token is not found");
@@ -42,12 +55,8 @@ public class JDAHandler implements AppService {
         token,
         GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
 
-    moduleController.getModules().forEach((k, v) -> {
-      if (ListenerAdapter.class.isAssignableFrom(k)) {
-        builder.addEventListeners(v);
-        logger.debug("Detected and assigned listener {} to JDA", k.getSimpleName());
-      }
-    });
+    buildSlashCommand(builder);
+    loadListeners(builder);
 
     jda = builder.build();
   }

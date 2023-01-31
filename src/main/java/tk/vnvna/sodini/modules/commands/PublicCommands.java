@@ -32,7 +32,7 @@ public class PublicCommands extends CommandBase {
     var triggerEvent = executionInfo.getTriggerEvent();
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
-          .sendMessage("pong")
+          .sendMessage("Gateway ping: " + jdaHandler.getJda().getGatewayPing() + " ms")
           .queue();
     }
   }

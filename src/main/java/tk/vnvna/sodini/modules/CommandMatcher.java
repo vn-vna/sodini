@@ -1,32 +1,25 @@
-package tk.vnvna.sodini.discord.helpers;
+package tk.vnvna.sodini.modules;
 
-import lombok.Getter;
 import net.dv8tion.jda.api.events.Event;
-import tk.vnvna.sodini.modules.ArgumentParser;
-import tk.vnvna.sodini.modules.CommandLoader;
+import tk.vnvna.sodini.controllers.annotations.AppModule;
+import tk.vnvna.sodini.controllers.annotations.Dependency;
+import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 
 import java.util.Objects;
 import java.util.Optional;
 
+@AppModule
 public class CommandMatcher {
 
-  @Getter
-  private final CommandLoader commandLoader;
+  @Dependency
+  private CommandLoader commandLoader;
 
-  @Getter
-  private final String commandString;
-  private final Event triggeredEvent;
-  private ExecutionInfo executionInfo = null;
+  @Dependency
   private ArgumentParser argumentParser;
 
-  public CommandMatcher(ArgumentParser argumentParser, CommandLoader commandLoader, String commandString, Event event) {
-    this.commandLoader = commandLoader;
-    this.triggeredEvent = event;
-    this.commandString = commandString;
-    this.argumentParser = argumentParser;
-  }
 
-  public Optional<ExecutionInfo> matchCommand() {
+  public Optional<ExecutionInfo> matchCommand(Event triggeredEvent, String commandString) {
+    ExecutionInfo executionInfo = null;
 
     for (var commandEntry : commandLoader.getCommands().entrySet()) {
       if (Objects.nonNull(executionInfo)) {
