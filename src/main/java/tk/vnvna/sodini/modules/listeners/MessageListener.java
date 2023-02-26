@@ -2,6 +2,7 @@ package tk.vnvna.sodini.modules.listeners;
 
 import lombok.Getter;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
@@ -23,6 +24,7 @@ import tk.vnvna.sodini.utils.TimeUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @AppModule
@@ -162,26 +164,13 @@ public class MessageListener extends ListenerAdapter {
         .setDescription("Command: " + commandName)
         .setTimestamp(TimeUtils.getDateTimeUTC());
 
-    for (var perm : botPermission) {
-      embedBuilder
-          .addField(perm.getName(), missinPermission.contains(perm) ? "Missing" : "Acquired", false);
-    }
-
-    var embed = embedBuilder.build();
-
-    var message = new MessageCreateBuilder()
-        .setEmbeds(embed)
-        .build();
-
-    mre.getChannel()
-        .sendMessage(message)
-        .queue();
+    resolveMissingPermissions(mre, botPermission, missinPermission, embedBuilder);
   }
 
   private void respondUPMException(MessageReceivedEvent mre, UserPermissionMismatchExecption bpme,
                                    ExecutionResult result) {
     var commandName = result.getExecutionInfo().getCommandProperties().getMatchString();
-    var botPermission = result.getExecutionInfo().getCommandProperties().getBotPermissions();
+    var userPermission = result.getExecutionInfo().getCommandProperties().getUserPermissions();
     var missinPermission = bpme.getPermissionMissing();
 
     var embedBuilder = new EmbedBuilder()
@@ -189,7 +178,11 @@ public class MessageListener extends ListenerAdapter {
         .setDescription("Command: " + commandName)
         .setTimestamp(TimeUtils.getDateTimeUTC());
 
-    for (var perm : botPermission) {
+    resolveMissingPermissions(mre, userPermission, missinPermission, embedBuilder);
+  }
+
+  private void resolveMissingPermissions(MessageReceivedEvent mre, List<Permission> userPermission, List<Permission> missinPermission, EmbedBuilder embedBuilder) {
+    for (var perm : userPermission) {
       embedBuilder
           .addField(perm.getName(), missinPermission.contains(perm) ? "Missing" : "Acquired", false);
     }
