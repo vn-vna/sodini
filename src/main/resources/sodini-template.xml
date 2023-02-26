@@ -5,4 +5,9 @@
         <Token>Secret</Token>
         <Prefix>Prefix of the command</Prefix>
     </Discord>
+    <Application>
+        <ApiKeys>
+
+        </ApiKeys>
+    </Application>
 </Configuration>

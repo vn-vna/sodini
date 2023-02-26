@@ -27,9 +27,15 @@ public class CommandMatcher {
       }
 
       var cmdFound = commandString.indexOf(commandEntry.getKey());
+
+      if (cmdFound != 0)
+      {
+        continue;
+      }
+
       var cmdExit = commandString.length() == commandEntry.getKey().length() || commandString.charAt(commandEntry.getKey().length()) == ' ';
 
-      if (cmdFound != 0 || !cmdExit) {
+      if (!cmdExit) {
         continue;
       }
 
@@ -44,7 +50,6 @@ public class CommandMatcher {
       executionInfo.setCommandArguments(argArray);
       executionInfo.setTriggerEvent(triggeredEvent);
     }
-
 
     return Optional.ofNullable(executionInfo);
   }

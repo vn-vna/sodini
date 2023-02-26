@@ -9,6 +9,7 @@ import lombok.NonNull;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.exceptions.ConfigurationVariableNotFoundException;
+import tk.vnvna.sodini.utils.XmlUtils;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,19 +30,7 @@ public class Configuration {
 
   public void reload() {
     logger.info("Application requested to reload configuration from file {}", CFG_FILE);
-    try (var fis = Configuration.class.getResourceAsStream(CFG_FILE)) {
-      DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
-
-      if (Objects.isNull(fis)) {
-        return;
-      }
-
-      Document doc = documentBuilder.parse(fis);
-      this.root = doc.getDocumentElement();
-    } catch (ParserConfigurationException | IOException | SAXException e) {
-      throw new RuntimeException(e);
-    }
+    this.root = XmlUtils.loadXmlResource(CFG_FILE);
   }
 
   private void reloadGuard() {
@@ -56,24 +45,7 @@ public class Configuration {
 
   public Optional<String> getConfiguration(String pattern) {
     reloadGuard();
-
-    Element crrElem = this.root;
-
-    String[] paths = pattern.split("::");
-    for (var dom : paths) {
-      var nodes = crrElem.getElementsByTagName(dom);
-      if (nodes.getLength() == 0) {
-        return null;
-      }
-
-      if (nodes.getLength() > 1) {
-        logger.warn("There are multiple node found for dom [{}], configuration would get only the first element", dom);
-      }
-
-      crrElem = (Element) nodes.item(0);
-    }
-
-    return Optional.ofNullable(crrElem.getTextContent());
+    return XmlUtils.getSingleValue(this.root, pattern);
   }
 
   public String requireConfiguration(String pattern) {

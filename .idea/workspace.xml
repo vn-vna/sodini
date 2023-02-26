@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add command exception handler, fix command matcher problems.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/ConfigurationVariableNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ArgumentConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/BotPermissionMismatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/UserPermissionMismatchExecption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/ManagerCommands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/DiscordUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/TimeUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/XmlUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/BotPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/BotPermission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/UserPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/UserPermission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ExecutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ExecutionInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/ArgumentListNotCompatibleException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/ArgumentListNotCompatibleException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/PermissionMismatchException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/PermissionMismatchException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +40,43 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sodini" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sodini" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sodini" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sodini" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,6 +90,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.dv8tion/JDA/5.0.0-beta.3/6674738e6bd546e46b0e6a6230fa77fd4d8794f/JDA-5.0.0-beta.3-sources.jar!/net/dv8tion/jda/api/hooks/ListenerAdapter.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,7 +119,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -128,6 +186,10 @@
       <workItem from="1674915903101" duration="986000" />
       <workItem from="1674916902003" duration="2355000" />
       <workItem from="1674998222365" duration="7690000" />
+      <workItem from="1677329339122" duration="7287000" />
+      <workItem from="1677385334016" duration="164000" />
+      <workItem from="1677385504181" duration="5725000" />
+      <workItem from="1677404149837" duration="2016000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -178,26 +240,5 @@
     <MESSAGE value="Message command worked." />
     <MESSAGE value="Add command exception handler, fix command matcher problems." />
     <option name="LAST_COMMIT_MESSAGE" value="Add command exception handler, fix command matcher problems." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

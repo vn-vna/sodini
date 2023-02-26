@@ -1,20 +1,32 @@
 package tk.vnvna.sodini.modules;
 
 import lombok.Getter;
-import net.dv8tion.jda.api.entities.IMentionable;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
+import net.dv8tion.jda.api.entities.channel.concrete.ForumChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.NewsChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.StageChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.controllers.annotations.ModuleEntry;
+import tk.vnvna.sodini.discord.helpers.ArgumentConverter;
+import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 import tk.vnvna.sodini.exceptions.ArgumentListNotCompatibleException;
+import tk.vnvna.sodini.exceptions.ArgumentListNotCompatibleException.Reason;
 import tk.vnvna.sodini.utils.Tokenizer;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @AppModule
@@ -29,13 +41,50 @@ public class ArgumentParser {
   @Getter
   private Tokenizer<TokenType> tokenizer;
 
+  @Getter
+  private Map<Class<?>, ArgumentConverter<?>> converters;
+
   @ModuleEntry
   public void initialize() {
+    initTokenizer();
+    initConverters();
+  }
+
+  private void initTokenizer() {
     tokenizer = new Tokenizer<>();
+
     tokenizer.registerToken("<#\\w+>", TokenType.CHANNEL_ID);
     tokenizer.registerToken("<@\\w+>", TokenType.USER_ID);
     tokenizer.registerToken("\\\".+\\\"", TokenType.STRING);
     tokenizer.registerToken("[^\\s]+", TokenType.WORD);
+  }
+
+  private void initConverters() {
+    converters = new Hashtable<>();
+
+    assignConverter(Integer.class, Integer::parseInt);
+    assignConverter(int.class, Integer::parseInt);
+
+    assignConverter(Long.class, Long::parseLong);
+    assignConverter(long.class, Long::parseLong);
+
+    assignConverter(Float.class, Float::parseFloat);
+    assignConverter(float.class, Float::parseFloat);
+
+    assignConverter(Double.class, Double::parseDouble);
+    assignConverter(double.class, Double::parseDouble);
+
+    assignConverter(User.class, (s) -> jdaHandler.getJda().getUserById(s));
+
+    assignConverter(Channel.class, (s) -> jdaHandler.getJda().getChannelById(Channel.class, s));
+    assignConverter(TextChannel.class, (s) -> jdaHandler.getJda().getChannelById(TextChannel.class, s));
+    assignConverter(VoiceChannel.class, (s) -> jdaHandler.getJda().getChannelById(VoiceChannel.class, s));
+    assignConverter(ForumChannel.class, (s) -> jdaHandler.getJda().getChannelById(ForumChannel.class, s));
+    assignConverter(PrivateChannel.class, (s) -> jdaHandler.getJda().getChannelById(PrivateChannel.class, s));
+    assignConverter(GuildChannel.class, (s) -> jdaHandler.getJda().getChannelById(GuildChannel.class, s));
+    assignConverter(NewsChannel.class, (s) -> jdaHandler.getJda().getChannelById(NewsChannel.class, s));
+    assignConverter(StageChannel.class, (s) -> jdaHandler.getJda().getChannelById(StageChannel.class, s));
+    assignConverter(ThreadChannel.class, (s) -> jdaHandler.getJda().getChannelById(ThreadChannel.class, s));
   }
 
   public List<Object> parse(String argString) {
@@ -47,16 +96,9 @@ public class ArgumentParser {
         case STRING, WORD -> {
           arguments.add(token.getTokenString());
         }
-        case CHANNEL_ID -> {
+        case CHANNEL_ID, USER_ID -> {
           var channelId = getIdFromDiscordMention(token.getTokenString());
-          var channel = jdaHandler.getJda()
-              .getChannelById(Channel.class, channelId);
-          arguments.add(channel);
-        }
-        case USER_ID -> {
-          var userId = getIdFromDiscordMention(token.getTokenString());
-          var user = jdaHandler.getJda().getUserById(userId);
-          arguments.add(user);
+          arguments.add(channelId);
         }
       }
     }
@@ -64,130 +106,71 @@ public class ArgumentParser {
     return arguments;
   }
 
-  public List<Object> converArgumentList(List<Object> arguments, List<Parameter> params) {
-    if (arguments.size() != params.size()) {
-      throw new ArgumentListNotCompatibleException();
-    }
+  public List<Object> convertArgumentList(ExecutionInfo executionInfo, List<Object> arguments, List<Parameter> params) {
+    List<Object> convertedArguments = new ArrayList<>();
+    int i = 0;
+    int j = 0;
 
-    int sz = arguments.size();
+    while (i < params.size()) {
 
-    for (int i = 0; i < sz; ++i) {
-      arguments.set(i, convertArgument(arguments.get(i), params.get(i)));
+      var param = params.get(i);
+      var nullable = Objects.isNull(param.getAnnotation(Nonnull.class));
+
+      if (param.getType().equals(ExecutionInfo.class)) {
+        convertedArguments.add(executionInfo);
+        ++i;
+        continue;
+      }
+
+      // Convert
+      Object arg;
+      if (j >= arguments.size()) {
+        arg = null;
+      } else {
+        arg = convertArgument(executionInfo, arguments.get(j), param);
+      }
+
+      if (Objects.isNull(arg) && !nullable) {
+        throw new ArgumentListNotCompatibleException(
+            param,
+            executionInfo,
+            Reason.NON_NULL);
+      }
+
+      ++i;
+      ++j;
     }
 
     return arguments;
   }
 
-  /**
-   * Pls don't care about this shit =)))
-   * @param o
-   * @param param
-   * @return
-   */
-  private Object convertArgument(Object o, Parameter param) {
+  private Object convertArgument(ExecutionInfo executionInfo, Object o, Parameter param) {
     if (Objects.isNull(o) || param.getType().equals(o.getClass())) {
       return o;
     }
-
-    var aClass = param.getType();
     var nullable = Objects.isNull(param.getAnnotation(Nonnull.class));
 
     try {
-      if (int.class.equals(aClass) || Integer.class.equals(aClass)) {
-        if (o instanceof IMentionable u) {
-          logger.warn("Conversion from mention id to integer may be failed");
-          return Integer.parseInt(u.getId());
-        }
-
-        if (o instanceof String s) {
-          return Integer.parseInt(s);
-        }
+      if (o instanceof String s && converters.containsKey(param.getType())) {
+        return converters.get(param.getType()).convert(s);
       }
 
-      if (long.class.equals(aClass) || Long.class.equals(aClass)) {
-        if (o instanceof IMentionable u) {
-          return Long.parseLong(u.getId());
-        }
+      throw new ArgumentListNotCompatibleException(
+          param,
+          executionInfo,
+          Reason.TYPE_ERROR);
 
-        if (o instanceof String s) {
-          return Long.parseLong(s);
-        }
-      }
-
-      if (float.class.equals(aClass) || Float.class.equals(aClass)) {
-        if (o instanceof IMentionable) {
-          throw new IllegalArgumentException("Cannot convert from mentionable object to float");
-        }
-
-        if (o instanceof String s) {
-          return Float.parseFloat(s);
-        }
-      }
-
-      if (double.class.equals(aClass) || Double.class.equals(aClass)) {
-        if (o instanceof IMentionable) {
-          throw new IllegalArgumentException("Cannot convert from mentionable object to double");
-        }
-
-        if (o instanceof String s) {
-          return Double.parseDouble(s);
-        }
-      }
-
-      if (String.class.equals(aClass)) {
-        if (o instanceof IMentionable u) {
-          return u.getId();
-        }
-
-        if (o instanceof String s) {
-          return s;
-        }
-      }
-
-      if (User.class.isAssignableFrom(aClass)) {
-        if (o instanceof User u) {
-          return u;
-        }
-
-        if (o instanceof Channel) {
-          throw new IllegalArgumentException("Channel cannot be converted to User");
-        }
-
-        if (o instanceof String s) {
-          var u = jdaHandler.getJda().getUserById(s);
-          if (Objects.isNull(u)) {
-            throw new IllegalArgumentException("Cannot get user with ID " + s);
-          }
-          return u;
-        }
-      }
-
-      if (Channel.class.isAssignableFrom(aClass)) {
-        if (o instanceof User) {
-          throw new IllegalArgumentException("User cannot be converted to Channel");
-        }
-
-        if (o instanceof Channel c) {
-          return c;
-        }
-
-        if (o instanceof String s) {
-          var u = jdaHandler.getJda().getChannelById(Channel.class, s);
-          if (Objects.isNull(u)) {
-            throw new IllegalArgumentException("Cannot get channel with ID " + s);
-          }
-          return u;
-        }
-      }
-
-      throw new IllegalArgumentException("An unexpected argument found with type: " + o.getClass().getName());
     } catch (Exception ex) {
       if (nullable) {
         return null;
       }
 
-      throw new RuntimeException(ex);
+      throw ex;
     }
+  }
+
+  private <T> void assignConverter(Class<T> type, ArgumentConverter<T> method) {
+    converters.put(type, method);
   }
 
   public String getIdFromDiscordMention(String mention) {

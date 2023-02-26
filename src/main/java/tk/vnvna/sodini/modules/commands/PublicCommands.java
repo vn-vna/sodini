@@ -1,19 +1,18 @@
 package tk.vnvna.sodini.modules.commands;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.Channel;
-import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
+import tk.vnvna.sodini.discord.annotations.BotPermission;
 import tk.vnvna.sodini.discord.annotations.CommandGroup;
 import tk.vnvna.sodini.discord.annotations.CommandMethod;
 import tk.vnvna.sodini.discord.helpers.CommandBase;
 import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 import tk.vnvna.sodini.modules.JDAHandler;
-import tk.vnvna.sodini.utils.ApiUtils;
 
 import javax.annotation.Nonnull;
 
@@ -38,22 +37,30 @@ public class PublicCommands extends CommandBase {
   }
 
   @CommandMethod("test")
-  public void test(ExecutionInfo executionInfo, @Nonnull String someString) {
+  public void test(
+      ExecutionInfo executionInfo,
+      @Nonnull String someString) {
     logger.info(someString);
   }
 
   @CommandMethod("channel")
-  public void channel(ExecutionInfo executionInfo, @Nonnull GuildMessageChannel channel) {
+  public void channel(
+      ExecutionInfo executionInfo,
+      @Nonnull TextChannel channel) {
     var triggerEvent = executionInfo.getTriggerEvent();
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
           .sendMessage(channel.getAsMention())
           .queue();
+
+      channel.sendMessage("Booooooooom!!!!!!!").queue();
     }
   }
 
   @CommandMethod("user")
-  public void user(ExecutionInfo executionInfo, User user) {
+  public void user(
+      ExecutionInfo executionInfo,
+      User user) {
     var triggerEvent = executionInfo.getTriggerEvent();
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
@@ -62,9 +69,10 @@ public class PublicCommands extends CommandBase {
     }
   }
 
+  @BotPermission({ Permission.MANAGE_SERVER })
   @CommandMethod("te")
   public void trendingAnimes(ExecutionInfo executionInfo) {
-    ApiUtils.getTrendingAnimes();
+    logger.info("Executed");
   }
 
 }

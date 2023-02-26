@@ -1,14 +1,23 @@
 package tk.vnvna.sodini.modules;
 
 import lombok.Getter;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.utils.PermissionUtil;
 import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.controllers.helpers.AppService;
 import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 import tk.vnvna.sodini.discord.helpers.ExecutionResult;
+import tk.vnvna.sodini.exceptions.BotPermissionMismatchException;
+import tk.vnvna.sodini.exceptions.UserPermissionMismatchExecption;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
@@ -20,12 +29,14 @@ import java.util.concurrent.TimeUnit;
 @AppModule
 public class CommandExecutor implements AppService {
 
-
   @Dependency
   private ArgumentParser argumentParser;
 
   @Dependency
   private Logger logger;
+
+  @Dependency
+  private JDAHandler jdaHandler;
 
   @Getter
   private ThreadPoolExecutor threadPoolExecutor;
@@ -50,17 +61,80 @@ public class CommandExecutor implements AppService {
 
   }
 
-  private void tryToExecute(ExecutionInfo executionInfo) throws InvocationTargetException, IllegalAccessException {
+  private void checkBotPermission(ExecutionInfo executionInfo) {
+    List<Permission> permissionMissing = new ArrayList<>();
+
+    var botUser = jdaHandler.getJda().getSelfUser();
+    var botId = botUser.getId();
+    var requiredPermissions = executionInfo.getCommandProperties().getBotPermissions();
+
+    Member botAsMember = null;
+
+    if (executionInfo.getTriggerEvent() instanceof MessageReceivedEvent mre) {
+      botAsMember = mre.getGuild().getMemberById(botId);
+    } else if (executionInfo.getTriggerEvent() instanceof SlashCommandInteractionEvent scie) {
+      botAsMember = scie.getGuild().getMember(botUser);
+    }
+
+    for (var requiredPermission : requiredPermissions) {
+      var acquired = PermissionUtil.checkPermission(botAsMember, requiredPermission);
+
+      if (!acquired) {
+        permissionMissing.add(requiredPermission);
+      }
+    }
+
+    if (!permissionMissing.isEmpty()) {
+      throw new BotPermissionMismatchException(botUser, executionInfo, permissionMissing);
+    }
+  }
+
+  private void checkUserPermission(ExecutionInfo executionInfo) {
+    List<Permission> permissionMissing = new ArrayList<>();
+
+    User user = null;
+    Member member = null;
+    var requiredPermissions = executionInfo.getCommandProperties().getUserPermissions();
+
+    if (executionInfo.getTriggerEvent() instanceof MessageReceivedEvent mre) {
+      user = mre.getAuthor();
+      member = mre.getMember();
+    } else if (executionInfo.getTriggerEvent() instanceof SlashCommandInteractionEvent scie) {
+      user = scie.getUser();
+      member = scie.getMember();
+    }
+
+    for (var requiredPermission : requiredPermissions) {
+      var acquired = PermissionUtil.checkPermission(member, requiredPermission);
+
+      if (!acquired) {
+        permissionMissing.add(requiredPermission);
+      }
+    }
+
+    if (!permissionMissing.isEmpty()) {
+      throw new UserPermissionMismatchExecption(user, executionInfo, permissionMissing);
+    }
+  }
+
+  private void checkPreconditions(ExecutionInfo executionInfo) {
+    checkBotPermission(executionInfo);
+    checkUserPermission(executionInfo);
+  }
+
+  private void tryToExecute(ExecutionInfo executionInfo)
+      throws InvocationTargetException, IllegalAccessException {
+    checkPreconditions(executionInfo);
+
     var commandModule = executionInfo.getCommandProperties().getCommandGroup();
     var commandMethod = executionInfo.getCommandProperties().getCommandMethod();
     var paramList = List.of(commandMethod.getParameters());
     var argList = executionInfo.getCommandArguments();
 
-    if (paramList.size() != 0 && paramList.get(0).getType().equals(ExecutionInfo.class)) {
-      argList.add(0, executionInfo);
-    }
-
-    commandMethod.invoke(commandModule, argumentParser.converArgumentList(argList, paramList).toArray());
+    commandMethod.invoke(
+        commandModule,
+        argumentParser.convertArgumentList(executionInfo, argList, paramList)
+            .toArray());
   }
 
   public Future<ExecutionResult> executeCommand(ExecutionInfo executionInfo) {
