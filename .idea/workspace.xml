@@ -4,32 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add command exception handler, fix command matcher problems.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ArgumentConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/BotPermissionMismatchException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/UserPermissionMismatchExecption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/ManagerCommands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/DiscordUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/TimeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/XmlUtils.java" afterDir="false" />
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add preconditions checker, post-execute actions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/BotPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/BotPermission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/UserPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/annotations/UserPermission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/CommandProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ExecutionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/discord/helpers/ExecutionInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/ArgumentListNotCompatibleException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/ArgumentListNotCompatibleException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/PermissionMismatchException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/exceptions/PermissionMismatchException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +166,7 @@
       <workItem from="1677329339122" duration="7287000" />
       <workItem from="1677385334016" duration="164000" />
       <workItem from="1677385504181" duration="5725000" />
-      <workItem from="1677404149837" duration="2016000" />
+      <workItem from="1677404149837" duration="2395000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -226,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675006583409</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add preconditions checker, post-execute actions">
+      <created>1677406272412</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677406272412</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +223,7 @@
     <MESSAGE value="Update codebase for command handling" />
     <MESSAGE value="Message command worked." />
     <MESSAGE value="Add command exception handler, fix command matcher problems." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add command exception handler, fix command matcher problems." />
+    <MESSAGE value="Add preconditions checker, post-execute actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add preconditions checker, post-execute actions" />
   </component>
 </project>

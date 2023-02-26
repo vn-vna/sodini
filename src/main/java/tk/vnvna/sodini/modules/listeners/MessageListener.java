@@ -110,7 +110,6 @@ public class MessageListener extends ListenerAdapter {
 
   private void respondANCException(MessageReceivedEvent mre, ArgumentListNotCompatibleException ex,
                                    ExecutionResult result) {
-    var messageChannel = mre.getChannel();
     var commandName = result.getExecutionInfo().getCommandProperties().getMatchString();
     var params = Arrays.stream(result.getExecutionInfo()
             .getCommandProperties()
@@ -147,13 +146,13 @@ public class MessageListener extends ListenerAdapter {
         .setEmbeds(embed)
         .build();
 
-    messageChannel.sendMessage(message)
+    mre.getChannel()
+        .sendMessage(message)
         .queue();
   }
 
   private void respondBPMException(MessageReceivedEvent mre, BotPermissionMismatchException bpme,
                                    ExecutionResult result) {
-    var messageChannel = mre.getChannel();
     var commandName = result.getExecutionInfo().getCommandProperties().getMatchString();
     var botPermission = result.getExecutionInfo().getCommandProperties().getBotPermissions();
     var missinPermission = bpme.getPermissionMissing();
@@ -174,12 +173,13 @@ public class MessageListener extends ListenerAdapter {
         .setEmbeds(embed)
         .build();
 
-    mre.getChannel().sendMessage(message).queue();
+    mre.getChannel()
+        .sendMessage(message)
+        .queue();
   }
 
   private void respondUPMException(MessageReceivedEvent mre, UserPermissionMismatchExecption bpme,
                                    ExecutionResult result) {
-    var messageChannel = mre.getChannel();
     var commandName = result.getExecutionInfo().getCommandProperties().getMatchString();
     var botPermission = result.getExecutionInfo().getCommandProperties().getBotPermissions();
     var missinPermission = bpme.getPermissionMissing();
@@ -200,6 +200,9 @@ public class MessageListener extends ListenerAdapter {
         .setEmbeds(embed)
         .build();
 
+    mre.getChannel()
+        .sendMessage(message)
+        .queue();
   }
 
   private void handleCommandSuccess(ExecutionResult executionResult) {
