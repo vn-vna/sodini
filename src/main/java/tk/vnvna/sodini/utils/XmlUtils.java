@@ -25,7 +25,7 @@ public class XmlUtils {
     for (var dom : paths) {
       var nodes = crrElem.getElementsByTagName(dom);
       if (nodes.getLength() == 0) {
-        return null;
+        return Optional.empty();
       }
 
       crrElem = (Element) nodes.item(0);

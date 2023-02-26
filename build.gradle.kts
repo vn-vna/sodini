@@ -27,7 +27,13 @@ dependencies {
     implementation(group = "org.reflections", name = "reflections", version = "0.10.2")
 
     // Json
-    implementation(group = "org.json", name = "json", version = "20220924")
+    implementation(group = "javax.json", name = "javax.json-api", version = "1.1")
+    implementation(group = "org.glassfish", name = "javax.json", version = "1.1")
+
+    // Socket server
+    implementation(group = "org.glassfish.tyrus", name = "tyrus-server", version = "2.1.3")
+    implementation(group = "org.glassfish.tyrus", name = "tyrus-client", version = "2.1.3")
+    implementation(group = "org.glassfish.tyrus", name = "tyrus-container-grizzly-server", version = "2.1.3")
 
     // SLF4J
     implementation(group = "org.apache.logging.log4j", name = "log4j-api", version = "2.1")

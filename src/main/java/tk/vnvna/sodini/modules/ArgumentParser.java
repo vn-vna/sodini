@@ -137,6 +137,8 @@ public class ArgumentParser {
             Reason.NON_NULL);
       }
 
+      convertedArguments.add(arg);
+
       ++i;
       ++j;
     }

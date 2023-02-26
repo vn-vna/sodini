@@ -9,5 +9,10 @@
         <ApiKeys>
 
         </ApiKeys>
+        <Socket>
+            <Endpoint>/socket</Endpoint>
+            <Enabled>true</Enabled>
+            <Port>20402</Port>
+        </Socket>
     </Application>
 </Configuration>
