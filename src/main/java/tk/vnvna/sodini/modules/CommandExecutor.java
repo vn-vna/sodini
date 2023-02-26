@@ -131,10 +131,11 @@ public class CommandExecutor implements AppService {
     var paramList = List.of(commandMethod.getParameters());
     var argList = executionInfo.getCommandArguments();
 
-    commandMethod.invoke(
-        commandModule,
-        argumentParser.convertArgumentList(executionInfo, argList, paramList)
-            .toArray());
+    var args = argumentParser
+        .convertArgumentList(executionInfo, argList, paramList)
+        .toArray();
+
+    commandMethod.invoke(commandModule, args);
   }
 
   public Future<ExecutionResult> executeCommand(ExecutionInfo executionInfo) {

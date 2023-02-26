@@ -141,7 +141,7 @@ public class ArgumentParser {
       ++j;
     }
 
-    return arguments;
+    return convertedArguments;
   }
 
   private Object convertArgument(ExecutionInfo executionInfo, Object o, Parameter param) {

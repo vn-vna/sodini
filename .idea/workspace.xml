@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add preconditions checker, post-execute actions">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" afterDir="false" />
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Fix post-execute error handler">
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +165,7 @@
       <workItem from="1677329339122" duration="7287000" />
       <workItem from="1677385334016" duration="164000" />
       <workItem from="1677385504181" duration="5725000" />
-      <workItem from="1677404149837" duration="2395000" />
+      <workItem from="1677404149837" duration="2724000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -210,7 +209,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677406272412</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fix post-execute message">
+      <created>1677406561435</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1677406561435</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fix post-execute error handler">
+      <created>1677406677136</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1677406677136</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +237,19 @@
     <MESSAGE value="Message command worked." />
     <MESSAGE value="Add command exception handler, fix command matcher problems." />
     <MESSAGE value="Add preconditions checker, post-execute actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add preconditions checker, post-execute actions" />
+    <MESSAGE value="Fix post-execute message" />
+    <MESSAGE value="Fix post-execute error handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix post-execute error handler" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
