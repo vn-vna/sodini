@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add socket listener for event trigger">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/DateTimeUtils.java" afterDir="false" />
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add Command &quot;member&quot; command">
+      <change afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/SysMonitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/SocketServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/SocketServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketEntry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1188,7 +1185,8 @@
       <workItem from="1677385334016" duration="164000" />
       <workItem from="1677385504181" duration="5725000" />
       <workItem from="1677404149837" duration="12690000" />
-      <workItem from="1677456421190" duration="3570000" />
+      <workItem from="1677456421190" duration="6229000" />
+      <workItem from="1677517765549" duration="48000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -1260,7 +1258,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677428788928</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Remove SysMonitor module">
+      <created>1677460065045</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1677460065045</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add Command &quot;member&quot; command">
+      <created>1677460131488</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1677460131488</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1278,7 +1290,9 @@
     <MESSAGE value="Fix post-execute error handler" />
     <MESSAGE value="Fix argument converter returns wrong argument list" />
     <MESSAGE value="Add socket listener for event trigger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add socket listener for event trigger" />
+    <MESSAGE value="Remove SysMonitor module" />
+    <MESSAGE value="Add Command &quot;member&quot; command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Command &quot;member&quot; command" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

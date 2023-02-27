@@ -58,6 +58,7 @@ public class SocketServerHandler {
         socketServer.start();
         logger.info("Socket server has successfully deployed on port {}", port);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+          logger.info("Stopping socket server");
           socketServer.stop();
         }));
       } catch (DeploymentException e) {
