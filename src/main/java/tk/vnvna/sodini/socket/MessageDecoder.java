@@ -21,7 +21,7 @@ public class MessageDecoder implements Decoder.Text<SocketMessage> {
 
       var jsonObject = Json.createReader(new StringReader(s))
           .readObject();
-      message.setEvent(jsonObject.getString("event", "EMPTY_EVENT"));
+      message.setEvent(jsonObject.getString("event", SocketMessage.MSG_EMPTY));
       message.setTimestamp(jsonObject.getString("timestamp", null));
       message.setXmlData(jsonObject.getString("data", null));
 
