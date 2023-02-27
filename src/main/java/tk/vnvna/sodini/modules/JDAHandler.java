@@ -15,8 +15,6 @@ import java.util.Objects;
 
 @AppModule
 public class JDAHandler implements AppService {
-  @Dependency
-  private SysMonitor sysMonitor;
 
   @Dependency
   private Logger logger;
