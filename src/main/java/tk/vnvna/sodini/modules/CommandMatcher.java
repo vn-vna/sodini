@@ -15,6 +15,9 @@ public class CommandMatcher {
   private CommandLoader commandLoader;
 
   @Dependency
+  private JDAHandler jdaHandler;
+
+  @Dependency
   private ArgumentParser argumentParser;
 
 

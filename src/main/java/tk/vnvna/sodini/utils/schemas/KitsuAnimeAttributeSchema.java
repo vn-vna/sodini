@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class KitsuAnimeSchema {
+public class KitsuAnimeAttributeSchema {
   StdDateFormat createdAt;
   StdDateFormat updatedAt;
   String slug;

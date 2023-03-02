@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.controllers.annotations.ModuleEntry;
-import tk.vnvna.sodini.socket.SocketEntry;
+import tk.vnvna.sodini.socket.SocketServerConfiguration;
 
 @AppModule
 public class SocketServerHandler {
@@ -34,9 +34,13 @@ public class SocketServerHandler {
 
   private String contextPath;
 
+  private Object locker;
+
   @ModuleEntry
   public void initialize() {
     socketServerThread = new Thread(() -> {
+      locker = new Object();
+
       var enabledString = configuration.requireConfiguration("Application::Socket::Enabled");
       enabled = Boolean.parseBoolean(enabledString);
 
@@ -52,7 +56,7 @@ public class SocketServerHandler {
 
       contextPath = configuration.getConfiguration("Application::Socket::ContextPath").orElse("/socket");
 
-      socketServer = new Server("localhost", port, contextPath, null, SocketEntry.class);
+      socketServer = new Server("localhost", port, contextPath, null, SocketServerConfiguration.class);
 
       try {
         socketServer.start();
@@ -61,10 +65,16 @@ public class SocketServerHandler {
           logger.info("Stopping socket server");
           socketServer.stop();
         }));
+
+        synchronized (locker) {
+          locker.wait();
+        }
       } catch (DeploymentException e) {
         logger.error(
             "Deploy socket server at port {} has been failed due to error: {}",
             port, e);
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
       }
     });
 

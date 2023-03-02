@@ -10,6 +10,7 @@ import net.dv8tion.jda.internal.utils.PermissionUtil;
 import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
+import tk.vnvna.sodini.controllers.annotations.ModuleEntry;
 import tk.vnvna.sodini.controllers.helpers.AppService;
 import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 import tk.vnvna.sodini.discord.helpers.ExecutionResult;
@@ -27,7 +28,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 @AppModule
-public class CommandExecutor implements AppService {
+public class CommandExecutor {
 
   @Dependency
   private ArgumentParser argumentParser;
@@ -38,11 +39,20 @@ public class CommandExecutor implements AppService {
   @Dependency
   private JDAHandler jdaHandler;
 
+  @Dependency
+  private Configuration configuration;
+
   @Getter
   private ThreadPoolExecutor threadPoolExecutor;
 
-  @Override
-  public void awake() {
+  @ModuleEntry
+  public void initialize() {
+    if (!jdaHandler.isEnabled())
+    {
+      logger.warn("Command executor is disabled since discord module is disabled");
+      return;
+    }
+
     int corePoolSize = 5;
     int maximumPoolSize = 10;
     long keepAliveTime = 500;

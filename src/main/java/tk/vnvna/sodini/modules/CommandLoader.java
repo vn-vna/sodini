@@ -29,6 +29,12 @@ public class CommandLoader {
   @Dependency
   private ModuleController moduleController;
 
+  @Dependency
+  private Configuration configuration;
+
+  @Dependency
+  private JDAHandler jdaHandler;
+
   @Getter
   private HashMap<String, CommandProperties> commands;
 
@@ -37,6 +43,12 @@ public class CommandLoader {
 
   @ModuleEntry
   public void loadCommands() {
+    if (!jdaHandler.isEnabled())
+    {
+      logger.warn("Command loader is disabled since discord module is disabled");
+      return;
+    }
+
     commands = new HashMap<>();
     commandGroups = new HashMap<>();
 

@@ -1,5 +1,6 @@
 package tk.vnvna.sodini.modules.commands;
 
+import kotlin.jvm.Strictfp;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
@@ -39,18 +40,6 @@ public class PublicCommands extends CommandBase {
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
           .sendMessage("Gateway ping: " + jdaHandler.getJda().getGatewayPing() + " ms")
-          .queue();
-    }
-  }
-
-  @CommandMethod("user")
-  public void user(
-      ExecutionInfo executionInfo,
-      User user) {
-    var triggerEvent = executionInfo.getTriggerEvent();
-    if (triggerEvent instanceof MessageReceivedEvent mre) {
-      mre.getGuildChannel()
-          .sendMessage(user.getAsMention())
           .queue();
     }
   }
@@ -130,6 +119,17 @@ public class PublicCommands extends CommandBase {
       mre.getChannel()
           .sendMessage(message)
           .setAllowedMentions(Set.of())
+          .queue();
+    }
+  }
+
+  @CommandMethod("hello")
+  public void commandHello(ExecutionInfo executionInfo, @Nonnull User user, @Nonnull String message) {
+    var triggerEvent = executionInfo.getTriggerEvent();
+
+    if (triggerEvent instanceof MessageReceivedEvent mre) {
+      mre.getChannel()
+          .sendMessage("Hola " + user.getAsMention() + ", " + mre.getAuthor().getAsMention() + " said that: " + message)
           .queue();
     }
   }

@@ -38,6 +38,9 @@ public class ArgumentParser {
   @Dependency
   private JDAHandler jdaHandler;
 
+  @Dependency
+  private Configuration configuration;
+
   @Getter
   private Tokenizer<TokenType> tokenizer;
 
@@ -46,6 +49,12 @@ public class ArgumentParser {
 
   @ModuleEntry
   public void initialize() {
+    if (!jdaHandler.isEnabled())
+    {
+      logger.warn("Argument parser is disabled since discord module is disabled");
+      return;
+    }
+
     initTokenizer();
     initConverters();
   }

@@ -29,6 +29,7 @@ dependencies {
     // Json
     implementation(group = "javax.json", name = "javax.json-api", version = "1.1")
     implementation(group = "org.glassfish", name = "javax.json", version = "1.1")
+    implementation(group = "com.google.code.gson", name = "gson", version = "2.10.1")
 
     // Socket server
     implementation(group = "org.glassfish.tyrus", name = "tyrus-server", version = "2.1.3")

@@ -15,6 +15,7 @@ các vấn đề thực tiễn.
 # Tính năng
 
 1. Tính năng codebase
+
   - Sử dụng thư viện JDA nổi tiếng để thiết kế và tương tác với Discord API
   - Sử dụng thư viện lombok tăng tính hiệu quả của code. 
   - Sử dụng Dependency Injection trên toàn bộ codebase giúp quá trình cải tạo và

@@ -1,19 +1,24 @@
 package tk.vnvna.sodini.socket;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.websocket.EncodeException;
 import jakarta.websocket.Encoder;
-
-import javax.json.Json;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageEncoder implements Encoder.Text<SocketMessage> {
+  public static final Logger logger = LoggerFactory.getLogger(MessageEncoder.class);
+
   @Override
   public String encode(SocketMessage message) throws EncodeException {
-    var encodedMessage = Json.createObjectBuilder()
-        .add("event", message.getEvent())
-        .add("timestamp", message.getTimestamp())
-        .add("data", message.getXmlData())
-        .build();
-    return encodedMessage.toString();
+    try {
+      return new ObjectMapper().writeValueAsString(message);
+    } catch (JsonProcessingException e) {
+      logger.error("Cannot encode message due to error: " + e);
+    }
+
+    return null;
   }
 
   @Override

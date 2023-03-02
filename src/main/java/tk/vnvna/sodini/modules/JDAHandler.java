@@ -43,6 +43,13 @@ public class JDAHandler implements AppService {
 
   @Override
   public void awake() {
+    var enabled = Boolean.parseBoolean(configuration.requireConfiguration("Discord::Enabled"));
+    if (!enabled)
+    {
+      logger.warn("Cancelled initialization of discord module since it is disabled");
+      return;
+    }
+
     var token = configuration.requireConfiguration("Discord::Token");
 
     if (Objects.isNull(token) || token.isBlank()) {
@@ -57,5 +64,9 @@ public class JDAHandler implements AppService {
     loadListeners(builder);
 
     jda = builder.build();
+  }
+
+  public boolean isEnabled() {
+    return Boolean.parseBoolean(configuration.requireConfiguration("Discord::Enabled"));
   }
 }

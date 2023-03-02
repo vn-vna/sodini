@@ -2,6 +2,7 @@
 
 <Configuration>
     <Discord>
+        <Enabled>false</Enabled>
         <Token>Secret</Token>
         <Prefix>Prefix of the command</Prefix>
     </Discord>
