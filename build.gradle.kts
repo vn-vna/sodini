@@ -46,6 +46,9 @@ dependencies {
     implementation(group = "org.glassfish.jersey.core", name = "jersey-client", version = "3.1.0")
     implementation(group = "org.glassfish.jersey.media", name = "jersey-media-json-jackson", version = "3.1.0")
 
+    // Mapping generator
+    implementation(group = "org.jsonschema2pojo", name = "jsonschema2pojo-core", version = "1.1.1")
+
     // Manifold EXT
     compileOnly(group = "systems.manifold", name = "manifold-ext", version = "2022.1.38")
 }
