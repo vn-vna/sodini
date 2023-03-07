@@ -35,16 +35,16 @@ public class ModuleController {
     Reflections reflections = new Reflections(pkg);
 
     modules = reflections.getTypesAnnotatedWith(AppModule.class)
-        .stream()
-        .collect(Collectors.toMap((c) -> c, (c) -> {
-          try {
-            var constructor = c.getDeclaredConstructor();
-            return constructor.newInstance();
-          } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
-                   | InvocationTargetException e) {
-            throw new RuntimeException(e);
-          }
-        }));
+      .stream()
+      .collect(Collectors.toMap((c) -> c, (c) -> {
+        try {
+          var constructor = c.getDeclaredConstructor();
+          return constructor.newInstance();
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                 | InvocationTargetException e) {
+          throw new RuntimeException(e);
+        }
+      }));
 
     logger.debug("Loaded {} module(s) from project", modules.size());
   }
@@ -52,8 +52,8 @@ public class ModuleController {
   public void invokeEntries() {
     modules.forEach((clazz, module) -> {
       var invocations = Arrays.stream(clazz.getDeclaredMethods())
-          .filter((m) -> Objects.nonNull(m.getAnnotation(ModuleEntry.class)))
-          .toList();
+        .filter((m) -> Objects.nonNull(m.getAnnotation(ModuleEntry.class)))
+        .toList();
 
       if (invocations.size() == 0) {
         return;
@@ -80,39 +80,39 @@ public class ModuleController {
   private void autoInject() {
     modules.forEach((k, v) -> {
       Arrays.stream(k.getDeclaredFields())
-          .forEach((f) -> {
+        .forEach((f) -> {
 
-            var injectAnnotation = f.getAnnotation(Dependency.class);
+          var injectAnnotation = f.getAnnotation(Dependency.class);
 
-            if (Objects.isNull(injectAnnotation)) {
-              return;
-            }
+          if (Objects.isNull(injectAnnotation)) {
+            return;
+          }
 
-            if (f.getType().equals(Logger.class)) {
-              forceSetValue(f, v, LoggerFactory.getLogger(k));
-              logger.debug(
-                  "Injected logger to dependency {}",
-                  k.getSimpleName());
-              return;
-            }
-
-            if (f.getType().equals(ModuleController.class)) {
-              forceSetValue(f, v, this);
-              logger.debug(
-                  "Injected module controller to dependency {}",
-                  k.getSimpleName());
-              return;
-            }
-
-            var module = this.getModule(f.getType());
-            forceSetValue(f, v, module);
-
+          if (f.getType().equals(Logger.class)) {
+            forceSetValue(f, v, LoggerFactory.getLogger(k));
             logger.debug(
-                "Injected module instance {} to {} with field {}",
-                module.getClass().getSimpleName(),
-                k.getSimpleName(),
-                f.getName());
-          });
+              "Injected logger to dependency {}",
+              k.getSimpleName());
+            return;
+          }
+
+          if (f.getType().equals(ModuleController.class)) {
+            forceSetValue(f, v, this);
+            logger.debug(
+              "Injected module controller to dependency {}",
+              k.getSimpleName());
+            return;
+          }
+
+          var module = this.getModule(f.getType());
+          forceSetValue(f, v, module);
+
+          logger.debug(
+            "Injected module instance {} to {} with field {}",
+            module.getClass().getSimpleName(),
+            k.getSimpleName(),
+            f.getName());
+        });
     });
   }
 
@@ -131,7 +131,7 @@ public class ModuleController {
     this.modules.forEach((k, v) -> {
       if (v instanceof AppService service) {
         new Thread(service::awake, k.getSimpleName())
-            .start();
+          .start();
       }
     });
   }

@@ -12,11 +12,11 @@ public class ApiUtils {
   public static void getTrendingAnimes() {
     try (Client client = ClientBuilder.newClient()) {
       var response = client
-          .target("https://kitsu.io")
-          .path("/api/edge/trending/anime")
-          .request(MediaType.APPLICATION_JSON)
-          .get()
-          .readEntity(String.class);
+        .target("https://kitsu.io")
+        .path("/api/edge/trending/anime")
+        .request(MediaType.APPLICATION_JSON)
+        .get()
+        .readEntity(String.class);
 
       var data = new ObjectMapper().readValue(response, KitsuAnimeTrendingListSchema.class);
 

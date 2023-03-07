@@ -3,13 +3,7 @@ package tk.vnvna.sodini.modules;
 import lombok.Getter;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
-import net.dv8tion.jda.api.entities.channel.concrete.ForumChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.NewsChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.StageChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.*;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
@@ -23,11 +17,7 @@ import tk.vnvna.sodini.utils.Tokenizer;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @AppModule
 public class ArgumentParser {
@@ -49,8 +39,7 @@ public class ArgumentParser {
 
   @ModuleEntry
   public void initialize() {
-    if (!jdaHandler.isEnabled())
-    {
+    if (!jdaHandler.isEnabled()) {
       logger.warn("Argument parser is disabled since discord module is disabled");
       return;
     }
@@ -141,9 +130,9 @@ public class ArgumentParser {
 
       if (Objects.isNull(arg) && !nullable) {
         throw new ArgumentListNotCompatibleException(
-            param,
-            executionInfo,
-            Reason.NON_NULL);
+          param,
+          executionInfo,
+          Reason.NON_NULL);
       }
 
       convertedArguments.add(arg);
@@ -167,9 +156,9 @@ public class ArgumentParser {
       }
 
       throw new ArgumentListNotCompatibleException(
-          param,
-          executionInfo,
-          Reason.TYPE_ERROR);
+        param,
+        executionInfo,
+        Reason.TYPE_ERROR);
 
     } catch (Exception ex) {
       if (nullable) {

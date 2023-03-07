@@ -44,8 +44,7 @@ public class JDAHandler implements AppService {
   @Override
   public void awake() {
     var enabled = Boolean.parseBoolean(configuration.requireConfiguration("Discord::Enabled"));
-    if (!enabled)
-    {
+    if (!enabled) {
       logger.warn("Cancelled initialization of discord module since it is disabled");
       return;
     }
@@ -57,8 +56,8 @@ public class JDAHandler implements AppService {
     }
 
     JDABuilder builder = JDABuilder.create(
-        token,
-        GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
+      token,
+      GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS));
 
     buildSlashCommand(builder);
     loadListeners(builder);

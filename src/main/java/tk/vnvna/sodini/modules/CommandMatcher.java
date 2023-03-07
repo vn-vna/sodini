@@ -31,8 +31,7 @@ public class CommandMatcher {
 
       var cmdFound = commandString.indexOf(commandEntry.getKey());
 
-      if (cmdFound != 0)
-      {
+      if (cmdFound != 0) {
         continue;
       }
 
@@ -46,8 +45,8 @@ public class CommandMatcher {
       executionInfo.setCommandProperties(commandEntry.getValue());
 
       var argString = commandString.equals(commandEntry.getKey()) ?
-          "" :
-          commandString.substring(executionInfo.getCommandProperties().getMatchString().length() + 1);
+        "" :
+        commandString.substring(executionInfo.getCommandProperties().getMatchString().length() + 1);
       var argArray = argumentParser.parse(argString);
 
       executionInfo.setCommandArguments(argArray);

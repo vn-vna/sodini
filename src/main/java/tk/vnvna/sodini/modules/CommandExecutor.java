@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.controllers.annotations.ModuleEntry;
-import tk.vnvna.sodini.controllers.helpers.AppService;
 import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
 import tk.vnvna.sodini.discord.helpers.ExecutionResult;
 import tk.vnvna.sodini.exceptions.BotPermissionMismatchException;
@@ -20,12 +19,7 @@ import tk.vnvna.sodini.exceptions.UserPermissionMismatchExecption;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @AppModule
 public class CommandExecutor {
@@ -47,8 +41,7 @@ public class CommandExecutor {
 
   @ModuleEntry
   public void initialize() {
-    if (!jdaHandler.isEnabled())
-    {
+    if (!jdaHandler.isEnabled()) {
       logger.warn("Command executor is disabled since discord module is disabled");
       return;
     }
@@ -62,12 +55,12 @@ public class CommandExecutor {
     RejectedExecutionHandler rejectedExecutionHandler = new ThreadPoolExecutor.CallerRunsPolicy();
 
     threadPoolExecutor = new ThreadPoolExecutor(
-        corePoolSize,
-        maximumPoolSize,
-        keepAliveTime,
-        unit,
-        blockingQueue,
-        rejectedExecutionHandler);
+      corePoolSize,
+      maximumPoolSize,
+      keepAliveTime,
+      unit,
+      blockingQueue,
+      rejectedExecutionHandler);
 
   }
 
@@ -133,7 +126,7 @@ public class CommandExecutor {
   }
 
   private void tryToExecute(ExecutionInfo executionInfo)
-      throws InvocationTargetException, IllegalAccessException {
+    throws InvocationTargetException, IllegalAccessException {
     checkPreconditions(executionInfo);
 
     var commandModule = executionInfo.getCommandProperties().getCommandGroup();
@@ -142,8 +135,8 @@ public class CommandExecutor {
     var argList = executionInfo.getCommandArguments();
 
     var args = argumentParser
-        .convertArgumentList(executionInfo, argList, paramList)
-        .toArray();
+      .convertArgumentList(executionInfo, argList, paramList)
+      .toArray();
 
     commandMethod.invoke(commandModule, args);
   }

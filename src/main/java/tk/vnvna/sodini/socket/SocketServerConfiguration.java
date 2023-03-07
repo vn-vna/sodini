@@ -15,9 +15,9 @@ public class SocketServerConfiguration implements ServerApplicationConfig {
 
     for (var endpoint : endpointClasses) {
       serverEndpointConfig.add(
-          ServerEndpointConfig.Builder
-              .create(endpoint, "/event")
-              .build());
+        ServerEndpointConfig.Builder
+          .create(endpoint, "/event")
+          .build());
     }
 
     return serverEndpointConfig;

@@ -62,20 +62,20 @@ public class MessageListener extends ListenerAdapter {
       var commandString = rawContent.substring(commandPrefix.length());
 
       commandMatcher
-          .matchCommand(event, commandString)
-          .ifPresent((executionInfo -> {
-            try {
-              var executionResult = commandExecutor.executeCommand(executionInfo).get();
+        .matchCommand(event, commandString)
+        .ifPresent((executionInfo -> {
+          try {
+            var executionResult = commandExecutor.executeCommand(executionInfo).get();
 
-              if (executionResult.isSuccess()) {
-                handleCommandSuccess(executionResult);
-              } else {
-                handleCommandError(executionResult);
-              }
-            } catch (InterruptedException | ExecutionException e) {
-              throw new RuntimeException(e);
+            if (executionResult.isSuccess()) {
+              handleCommandSuccess(executionResult);
+            } else {
+              handleCommandError(executionResult);
             }
-          }));
+          } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+          }
+        }));
     }
   }
 
@@ -85,11 +85,11 @@ public class MessageListener extends ListenerAdapter {
 
     // Show log
     logger.error(
-        "Execution of command \"{}\" from guild \"{}\" requested by user \"{}\" has been cancelled due to error: {}",
-        executionInfo.getCommandProperties().getMatchString(),
-        event.getGuild().getName(),
-        event.getAuthor().getAsTag(),
-        executionResult.getException().getClass().getSimpleName());
+      "Execution of command \"{}\" from guild \"{}\" requested by user \"{}\" has been cancelled due to error: {}",
+      executionInfo.getCommandProperties().getMatchString(),
+      event.getGuild().getName(),
+      event.getAuthor().getAsTag(),
+      executionResult.getException().getClass().getSimpleName());
 
     // Handle error
     var error = executionResult.getException();
@@ -114,17 +114,17 @@ public class MessageListener extends ListenerAdapter {
                                    ExecutionResult result) {
     var commandName = result.getExecutionInfo().getCommandProperties().getMatchString();
     var params = Arrays.stream(result.getExecutionInfo()
-            .getCommandProperties()
-            .getCommandMethod()
-            .getParameters())
-        .filter((p) -> !p.getType().equals(ExecutionInfo.class))
-        .toList();
+        .getCommandProperties()
+        .getCommandMethod()
+        .getParameters())
+      .filter((p) -> !p.getType().equals(ExecutionInfo.class))
+      .toList();
     var ok = true;
 
     var embedBuilder = new EmbedBuilder()
-        .setTitle("Command argument error")
-        .setDescription("Command: " + commandName)
-        .setTimestamp(TimeUtils.getDateTimeUTC());
+      .setTitle("Command argument error")
+      .setDescription("Command: " + commandName)
+      .setTimestamp(TimeUtils.getDateTimeUTC());
 
     for (var param : params) {
       String desc = null;
@@ -145,12 +145,12 @@ public class MessageListener extends ListenerAdapter {
     var embed = embedBuilder.build();
 
     var message = new MessageCreateBuilder()
-        .setEmbeds(embed)
-        .build();
+      .setEmbeds(embed)
+      .build();
 
     mre.getChannel()
-        .sendMessage(message)
-        .queue();
+      .sendMessage(message)
+      .queue();
   }
 
   private void respondBPMException(MessageReceivedEvent mre, BotPermissionMismatchException bpme,
@@ -160,9 +160,9 @@ public class MessageListener extends ListenerAdapter {
     var missinPermission = bpme.getPermissionMissing();
 
     var embedBuilder = new EmbedBuilder()
-        .setTitle("Bot permission mismatch")
-        .setDescription("Command: " + commandName)
-        .setTimestamp(TimeUtils.getDateTimeUTC());
+      .setTitle("Bot permission mismatch")
+      .setDescription("Command: " + commandName)
+      .setTimestamp(TimeUtils.getDateTimeUTC());
 
     resolveMissingPermissions(mre, botPermission, missinPermission, embedBuilder);
   }
@@ -174,9 +174,9 @@ public class MessageListener extends ListenerAdapter {
     var missinPermission = bpme.getPermissionMissing();
 
     var embedBuilder = new EmbedBuilder()
-        .setTitle("User permission mismatch")
-        .setDescription("Command: " + commandName)
-        .setTimestamp(TimeUtils.getDateTimeUTC());
+      .setTitle("User permission mismatch")
+      .setDescription("Command: " + commandName)
+      .setTimestamp(TimeUtils.getDateTimeUTC());
 
     resolveMissingPermissions(mre, userPermission, missinPermission, embedBuilder);
   }
@@ -184,18 +184,18 @@ public class MessageListener extends ListenerAdapter {
   private void resolveMissingPermissions(MessageReceivedEvent mre, List<Permission> userPermission, List<Permission> missinPermission, EmbedBuilder embedBuilder) {
     for (var perm : userPermission) {
       embedBuilder
-          .addField(perm.getName(), missinPermission.contains(perm) ? "Missing" : "Acquired", false);
+        .addField(perm.getName(), missinPermission.contains(perm) ? "Missing" : "Acquired", false);
     }
 
     var embed = embedBuilder.build();
 
     var message = new MessageCreateBuilder()
-        .setEmbeds(embed)
-        .build();
+      .setEmbeds(embed)
+      .build();
 
     mre.getChannel()
-        .sendMessage(message)
-        .queue();
+      .sendMessage(message)
+      .queue();
   }
 
   private void handleCommandSuccess(ExecutionResult executionResult) {
@@ -204,9 +204,9 @@ public class MessageListener extends ListenerAdapter {
 
     // Show log
     logger.info(
-        "Executed command \"{}\" from guild \"{}\" requested by user \"{}\"",
-        executionInfo.getCommandProperties().getMatchString(),
-        event.getGuild().getName(),
-        event.getAuthor().getAsTag());
+      "Executed command \"{}\" from guild \"{}\" requested by user \"{}\"",
+      executionInfo.getCommandProperties().getMatchString(),
+      event.getGuild().getName(),
+      event.getAuthor().getAsTag());
   }
 }

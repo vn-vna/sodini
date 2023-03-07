@@ -1,8 +1,6 @@
 package tk.vnvna.sodini.modules.commands;
 
-import kotlin.jvm.Strictfp;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
@@ -17,10 +15,6 @@ import tk.vnvna.sodini.modules.JDAHandler;
 import tk.vnvna.sodini.utils.DateTimeUtils;
 
 import javax.annotation.Nonnull;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,8 +33,8 @@ public class PublicCommands extends CommandBase {
     var triggerEvent = executionInfo.getTriggerEvent();
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
-          .sendMessage("Gateway ping: " + jdaHandler.getJda().getGatewayPing() + " ms")
-          .queue();
+        .sendMessage("Gateway ping: " + jdaHandler.getJda().getGatewayPing() + " ms")
+        .queue();
     }
   }
 
@@ -57,32 +51,32 @@ public class PublicCommands extends CommandBase {
 
       if (Objects.isNull(userAvatar) && Objects.isNull(guildAvatar)) {
         messageBuilder
-            .setContent("User [" + member.getAsMention() + "] has no avatar to display");
+          .setContent("User [" + member.getAsMention() + "] has no avatar to display");
       } else {
         if (Objects.nonNull(userAvatar)) {
           var embed = new EmbedBuilder()
-              .setTitle("User avatar")
-              .setImage(userAvatar)
-              .build();
+            .setTitle("User avatar")
+            .setImage(userAvatar)
+            .build();
 
           messageBuilder
-              .addEmbeds(embed);
+            .addEmbeds(embed);
         }
 
         if (Objects.nonNull(guildAvatar)) {
           var embed = new EmbedBuilder()
-              .setTitle("Guild avatar")
-              .setImage(guildAvatar)
-              .build();
+            .setTitle("Guild avatar")
+            .setImage(guildAvatar)
+            .build();
 
           messageBuilder
-              .addEmbeds(embed);
+            .addEmbeds(embed);
         }
       }
 
       mre.getChannel()
-          .sendMessage(messageBuilder.build())
-          .queue();
+        .sendMessage(messageBuilder.build())
+        .queue();
     }
   }
 
@@ -94,32 +88,32 @@ public class PublicCommands extends CommandBase {
       var member = mre.getGuild().getMember(user);
 
       var rolesMentioned = member
-          .getRoles()
-          .stream()
-          .map((r) -> r.getAsMention())
-          .reduce("", (s, r) -> s + r + ' ');
+        .getRoles()
+        .stream()
+        .map((r) -> r.getAsMention())
+        .reduce("", (s, r) -> s + r + ' ');
 
       var dateTimeFormatter = DateTimeUtils.NORMAL_FORMAT;
 
       var embed = new EmbedBuilder()
-          .setTitle(member.getEffectiveName())
-          .setDescription("ID: " + member.getId())
-          .setColor(member.getColor())
-          .addField("Joined", member.getTimeJoined().format(dateTimeFormatter), false)
-          .addField("Account created", user.getTimeCreated().format(dateTimeFormatter), false)
-          .addField("Username", member.getUser().getAsTag(), false)
-          .addField("Avatar URL", member.getEffectiveAvatarUrl(), false)
-          .addField("Roles", rolesMentioned, false)
-          .build();
+        .setTitle(member.getEffectiveName())
+        .setDescription("ID: " + member.getId())
+        .setColor(member.getColor())
+        .addField("Joined", member.getTimeJoined().format(dateTimeFormatter), false)
+        .addField("Account created", user.getTimeCreated().format(dateTimeFormatter), false)
+        .addField("Username", member.getUser().getAsTag(), false)
+        .addField("Avatar URL", member.getEffectiveAvatarUrl(), false)
+        .addField("Roles", rolesMentioned, false)
+        .build();
 
       var message = new MessageCreateBuilder()
-          .setEmbeds(embed)
-          .build();
+        .setEmbeds(embed)
+        .build();
 
       mre.getChannel()
-          .sendMessage(message)
-          .setAllowedMentions(Set.of())
-          .queue();
+        .sendMessage(message)
+        .setAllowedMentions(Set.of())
+        .queue();
     }
   }
 
@@ -129,8 +123,8 @@ public class PublicCommands extends CommandBase {
 
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getChannel()
-          .sendMessage("Hola " + user.getAsMention() + ", " + mre.getAuthor().getAsMention() + " said that: " + message)
-          .queue();
+        .sendMessage("Hola " + user.getAsMention() + ", " + mre.getAuthor().getAsMention() + " said that: " + message)
+        .queue();
     }
   }
 

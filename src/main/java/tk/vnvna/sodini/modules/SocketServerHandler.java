@@ -50,9 +50,9 @@ public class SocketServerHandler {
       }
 
       port = Integer.parseInt(
-          configuration
-              .getConfiguration("Application::Socket::Port")
-              .orElse("20402"));
+        configuration
+          .getConfiguration("Application::Socket::Port")
+          .orElse("20402"));
 
       contextPath = configuration.getConfiguration("Application::Socket::ContextPath").orElse("/socket");
 
@@ -71,8 +71,8 @@ public class SocketServerHandler {
         }
       } catch (DeploymentException e) {
         logger.error(
-            "Deploy socket server at port {} has been failed due to error: {}",
-            port, e);
+          "Deploy socket server at port {} has been failed due to error: {}",
+          port, e);
       } catch (InterruptedException e) {
         throw new RuntimeException(e);
       }

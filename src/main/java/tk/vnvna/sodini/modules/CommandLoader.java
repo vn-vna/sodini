@@ -15,11 +15,7 @@ import tk.vnvna.sodini.discord.helpers.CommandBase;
 import tk.vnvna.sodini.discord.helpers.CommandProperties;
 import tk.vnvna.sodini.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @AppModule
 public class CommandLoader {
@@ -43,8 +39,7 @@ public class CommandLoader {
 
   @ModuleEntry
   public void loadCommands() {
-    if (!jdaHandler.isEnabled())
-    {
+    if (!jdaHandler.isEnabled()) {
       logger.warn("Command loader is disabled since discord module is disabled");
       return;
     }
@@ -77,31 +72,31 @@ public class CommandLoader {
   private void loadMethods() {
     commandGroups.forEach((k, v) -> {
       Arrays.stream(k.getDeclaredMethods())
-          .filter((m) -> Objects.nonNull(m.getAnnotation(CommandMethod.class)))
-          .forEach((m) -> {
-            // Get basic properties
-            var commandProps = new CommandProperties();
-            commandProps.setCommandGroup(v);
-            commandProps.setCommandMethod(m);
+        .filter((m) -> Objects.nonNull(m.getAnnotation(CommandMethod.class)))
+        .forEach((m) -> {
+          // Get basic properties
+          var commandProps = new CommandProperties();
+          commandProps.setCommandGroup(v);
+          commandProps.setCommandMethod(m);
 
-            // Get command name
-            var commandName = m.getAnnotation(CommandMethod.class).value();
-            // Get match string
-            var matchString = StringUtils.joinNonBlanks(" ", commandProps.getCommandGroup().getGroupMatcher(),
-                commandName);
-            commandProps.setMatchString(matchString);
+          // Get command name
+          var commandName = m.getAnnotation(CommandMethod.class).value();
+          // Get match string
+          var matchString = StringUtils.joinNonBlanks(" ", commandProps.getCommandGroup().getGroupMatcher(),
+            commandName);
+          commandProps.setMatchString(matchString);
 
-            // Get command permissions
-            var userPermissionAnnotation = m.getAnnotation(UserPermission.class);
-            var userPermissions = Objects.isNull(userPermissionAnnotation) ? List.of() : List.of(userPermissionAnnotation.value());
-            commandProps.setUserPermissions((List<Permission>) userPermissions);
+          // Get command permissions
+          var userPermissionAnnotation = m.getAnnotation(UserPermission.class);
+          var userPermissions = Objects.isNull(userPermissionAnnotation) ? List.of() : List.of(userPermissionAnnotation.value());
+          commandProps.setUserPermissions((List<Permission>) userPermissions);
 
-            var botPermissionAnnotation = m.getAnnotation(BotPermission.class);
-            var botPermissions = Objects.isNull(botPermissionAnnotation) ? List.of() : List.of(botPermissionAnnotation.value());
-            commandProps.setBotPermissions((List<Permission>) botPermissions);
+          var botPermissionAnnotation = m.getAnnotation(BotPermission.class);
+          var botPermissions = Objects.isNull(botPermissionAnnotation) ? List.of() : List.of(botPermissionAnnotation.value());
+          commandProps.setBotPermissions((List<Permission>) botPermissions);
 
-            commands.put(matchString, commandProps);
-          });
+          commands.put(matchString, commandProps);
+        });
     });
   }
 

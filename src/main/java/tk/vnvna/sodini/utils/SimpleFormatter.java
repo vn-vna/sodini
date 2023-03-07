@@ -17,6 +17,22 @@ public class SimpleFormatter {
     this.value = null;
   }
 
+  public static SimpleFormatter create(String pattern, String... entries) {
+    var entryMap = new HashMap<String, String>();
+
+    for (var entry : entries) {
+      var entryArr = entry.split("::");
+
+      if (entryArr.length != 2) {
+        throw new IllegalArgumentException("Illegal entry pattern passed into formatter");
+      }
+
+      entryMap.put(entryArr[0], entryArr[1]);
+    }
+
+    return new SimpleFormatter(pattern, entryMap);
+  }
+
   private void parse() {
     if (!modified) {
       return;
@@ -40,22 +56,6 @@ public class SimpleFormatter {
     parse();
 
     return value;
-  }
-
-  public static SimpleFormatter create(String pattern, String... entries) {
-    var entryMap = new HashMap<String, String>();
-
-    for (var entry : entries) {
-      var entryArr = entry.split("::");
-
-      if (entryArr.length != 2) {
-        throw new IllegalArgumentException("Illegal entry pattern passed into formatter");
-      }
-
-      entryMap.put(entryArr[0], entryArr[1]);
-    }
-
-    return new SimpleFormatter(pattern, entryMap);
   }
 
 }
