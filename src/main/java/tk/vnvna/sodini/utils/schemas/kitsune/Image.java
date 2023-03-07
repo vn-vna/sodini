@@ -13,15 +13,6 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "tiny",
-    "large",
-    "small",
-    "medium",
-    "original",
-    "meta"
-})
-@Generated("jsonschema2pojo")
 public class Image {
 
     @JsonProperty("tiny")

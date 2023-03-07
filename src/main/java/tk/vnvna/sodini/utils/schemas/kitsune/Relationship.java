@@ -11,10 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "links"
-})
-@Generated("jsonschema2pojo")
 public class Relationship {
 
     @JsonProperty("links")

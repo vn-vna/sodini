@@ -14,11 +14,6 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "width",
-    "height"
-})
-@Generated("jsonschema2pojo")
 public class Dimension {
 
     @JsonProperty("width")
