@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add Command &quot;member&quot; command">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/endpoints/EventSocketEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketEntryBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/KitsuAnimeTrendingListSchema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/SimpleFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/ArgumentParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/JDAHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/SocketServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/SocketServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/MessageEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/socket/SocketServerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/ApiUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/ApiUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/KitsuAnimeSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/KitsuAnimeAttributeSchema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +98,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -124,7 +107,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.EntryPoint">
+  <component name="RunManager" selected="Application.SimpleFormatter">
     <configuration name="ApiUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tk.vnvna.sodini.utils.ApiUtils" />
       <module name="sodini.main" />
@@ -144,6 +127,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="tk.vnvna.sodini.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleFormatter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tk.vnvna.sodini.utils.SimpleFormatter" />
+      <module name="sodini.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tk.vnvna.sodini.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -176,6 +172,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SimpleFormatter" />
         <item itemvalue="Application.ApiUtils" />
         <item itemvalue="Gradle.TestCommandArgParser.Test" />
         <item itemvalue="Application.EntryPoint" />
@@ -208,6 +205,7 @@
       <workItem from="1677604378795" duration="1864000" />
       <workItem from="1677652031012" duration="100000" />
       <workItem from="1677653935054" duration="20000" />
+      <workItem from="1678157317346" duration="1468000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -325,5 +323,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
