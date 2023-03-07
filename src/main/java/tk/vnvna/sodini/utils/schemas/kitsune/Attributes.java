@@ -1,4 +1,3 @@
-
 package tk.vnvna.sodini.utils.schemas.kitsune;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

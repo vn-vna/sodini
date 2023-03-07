@@ -37,17 +37,4 @@ public class KitsuApiClient {
     }
   }
 
-  public static void main(String[] args) {
-    try (Client client = ClientBuilder.newClient()) {
-      var t = client
-        .target("https://kitsu.io")
-        .path("/api/edge/trending/manga")
-        .request(MediaType.APPLICATION_JSON)
-        .get()
-        .readEntity(KitsuTrendingSchema.class);
-
-      System.out.println(t);
-    }
-  }
-
 }

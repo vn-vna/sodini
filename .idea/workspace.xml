@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add Kitsu API client">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Add trending manga API for Kitsu API client">
       <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/KitsuApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/KitsuApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Attributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Attributes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Datum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Datum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Dimension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Dimension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Dimensions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Dimensions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Image.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/KitsuneTrendingSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/KitsuTrendingSchema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Links.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Links.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Meta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Meta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/RatingFrequencies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/RatingFrequencies.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Relationship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Relationship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Relationships.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/schemas/kitsune/Titles.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +221,7 @@
       <workItem from="1677604378795" duration="1864000" />
       <workItem from="1677652031012" duration="100000" />
       <workItem from="1677653935054" duration="20000" />
-      <workItem from="1678157317346" duration="9805000" />
+      <workItem from="1678157317346" duration="9883000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -341,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678166920517</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add trending manga API for Kitsu API client">
+      <created>1678171893352</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678171893352</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,18 +359,8 @@
     <MESSAGE value="Reformat code" />
     <MESSAGE value="Add Kitsu API" />
     <MESSAGE value="Add Kitsu API client" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Kitsu API client" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/KitsuApiClient.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add trending manga API for Kitsu API client" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add trending manga API for Kitsu API client" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
