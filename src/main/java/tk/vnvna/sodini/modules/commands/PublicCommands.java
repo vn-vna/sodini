@@ -11,11 +11,15 @@ import tk.vnvna.sodini.discord.annotations.CommandGroup;
 import tk.vnvna.sodini.discord.annotations.CommandMethod;
 import tk.vnvna.sodini.discord.helpers.CommandBase;
 import tk.vnvna.sodini.discord.helpers.ExecutionInfo;
+import tk.vnvna.sodini.modules.Configuration;
 import tk.vnvna.sodini.modules.JDAHandler;
+import tk.vnvna.sodini.modules.KitsuApiClient;
 import tk.vnvna.sodini.utils.DateTimeUtils;
+import tk.vnvna.sodini.utils.TimeUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @AppModule
@@ -26,10 +30,16 @@ public class PublicCommands extends CommandBase {
   private JDAHandler jdaHandler;
 
   @Dependency
+  private KitsuApiClient kitsuApiClient;
+
+  @Dependency
+  private Configuration configuration;
+
+  @Dependency
   private Logger logger;
 
   @CommandMethod("ping")
-  public void ping(ExecutionInfo executionInfo) {
+  public void commandPing(ExecutionInfo executionInfo) {
     var triggerEvent = executionInfo.getTriggerEvent();
     if (triggerEvent instanceof MessageReceivedEvent mre) {
       mre.getGuildChannel()
@@ -117,15 +127,139 @@ public class PublicCommands extends CommandBase {
     }
   }
 
-  @CommandMethod("hello")
-  public void commandHello(ExecutionInfo executionInfo, @Nonnull User user, @Nonnull String message) {
-    var triggerEvent = executionInfo.getTriggerEvent();
 
-    if (triggerEvent instanceof MessageReceivedEvent mre) {
+  @CommandMethod("trending-manga")
+  public void commandShowMangaTrending(ExecutionInfo executionInfo) {
+
+    var titleOrder = configuration.getListConfiguration("Application::Api::KitsuTitleOrder::Value");
+
+    var embedBuilder = new EmbedBuilder()
+      .setTitle("Trending Manga")
+      .setDescription("Latest trending manga list from Kitsu API")
+      .setTimestamp(TimeUtils.getDateTimeUTC());
+
+    var data = kitsuApiClient.getTrendingManga()
+      .getData();
+
+    data.forEach((attrib) -> {
+      var titles = attrib.getAttributes().getTitles();
+
+      String title = null;
+      for (var lang : titleOrder) {
+        title = titles.get(lang);
+
+        if (Objects.nonNull(title)) {
+          break;
+        }
+      }
+
+      if (Objects.isNull(title)) {
+        for (var titleSet : titles.entrySet()) {
+          title = titleSet.getValue();
+
+          if (Objects.nonNull(title)) {
+            break;
+          }
+        }
+      }
+
+      if (Objects.isNull(title)) {
+        title = "Manga";
+      }
+
+      var synopsis = attrib.getAttributes().getSynopsis();
+
+      if (Objects.nonNull(synopsis) && synopsis.length() > 50) {
+        synopsis = synopsis.substring(0, 50);
+        synopsis += "...";
+      }
+
+      var synopsisOp = Optional.of(synopsis);
+
+      embedBuilder.addField(
+        title,
+        synopsisOp.orElse("Synopsis"),
+        false);
+    });
+
+    var msg = new MessageCreateBuilder()
+      .setEmbeds(embedBuilder.build())
+      .build();
+
+    var event = executionInfo.getTriggerEvent();
+
+    if (event instanceof MessageReceivedEvent mre) {
       mre.getChannel()
-        .sendMessage("Hola " + user.getAsMention() + ", " + mre.getAuthor().getAsMention() + " said that: " + message)
+        .sendMessage(msg)
         .queue();
     }
   }
 
+
+  @CommandMethod("trending-ani")
+  public void commandShowAnimeTrending(ExecutionInfo executionInfo) {
+
+    var titleOrder = configuration.getListConfiguration("Application::Api::KitsuTitleOrder::Value");
+
+    var embedBuilder = new EmbedBuilder()
+      .setTitle("Trending Anime")
+      .setDescription("Latest trending anime list from Kitsu API")
+      .setTimestamp(TimeUtils.getDateTimeUTC());
+
+    var data = kitsuApiClient.getTrendingAnime()
+      .getData();
+
+    data.forEach((attrib) -> {
+      var titles = attrib.getAttributes().getTitles();
+
+      String title = null;
+      for (var lang : titleOrder) {
+        title = titles.get(lang);
+
+        if (Objects.nonNull(title)) {
+          break;
+        }
+      }
+
+      if (Objects.isNull(title)) {
+        for (var titleSet : titles.entrySet()) {
+          title = titleSet.getValue();
+
+          if (Objects.nonNull(title)) {
+            break;
+          }
+        }
+      }
+
+      if (Objects.isNull(title)) {
+        title = "Anime";
+      }
+
+      var synopsis = attrib.getAttributes().getSynopsis();
+
+      if (Objects.nonNull(synopsis) && synopsis.length() > 50) {
+        synopsis = synopsis.substring(0, 50);
+        synopsis += "...";
+      }
+
+      var synopsisOp = Optional.of(synopsis);
+
+      embedBuilder.addField(
+        title,
+        synopsisOp.orElse("Synopsis"),
+        false);
+    });
+
+    var msg = new MessageCreateBuilder()
+      .setEmbeds(embedBuilder.build())
+      .build();
+
+    var event = executionInfo.getTriggerEvent();
+
+    if (event instanceof MessageReceivedEvent mre) {
+      mre.getChannel()
+        .sendMessage(msg)
+        .queue();
+    }
+  }
 }

@@ -7,6 +7,7 @@ import tk.vnvna.sodini.controllers.annotations.Dependency;
 import tk.vnvna.sodini.exceptions.ConfigurationVariableNotFoundException;
 import tk.vnvna.sodini.utils.XmlUtils;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,6 +34,11 @@ public class Configuration {
         }
       }
     }
+  }
+
+  public List<String> getListConfiguration(String pattern) {
+    reloadGuard();;
+    return XmlUtils.getAllValue(this.root, pattern);
   }
 
   public Optional<String> getConfiguration(String pattern) {

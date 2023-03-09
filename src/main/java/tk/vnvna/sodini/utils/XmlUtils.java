@@ -56,7 +56,7 @@ public class XmlUtils {
     }
 
     crrElems.forEach((element -> {
-      values.add(element.getTextContent());
+      values.add(element.getTextContent().trim());
     }));
 
     return values;

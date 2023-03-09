@@ -7,13 +7,20 @@
         <Prefix>Prefix of the command</Prefix>
     </Discord>
     <Application>
-        <ApiKeys>
-
-        </ApiKeys>
         <Socket>
             <Endpoint>/socket</Endpoint>
-            <Enabled>true</Enabled>
+            <Enabled>false</Enabled>
             <Port>20402</Port>
         </Socket>
+
+        <Api>
+            <ApiKeys>
+            </ApiKeys>
+            <KitsuTitleOrder>
+                <Value>en</Value>
+                <Value>en_jp</Value>
+                <Value>ja_jp</Value>
+            </KitsuTitleOrder>
+        </Api>
     </Application>
 </Configuration>

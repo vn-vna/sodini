@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Reformat code">
+    <list default="true" id="621c1887-aaf4-43c8-b7b8-31c9517e7fbe" name="Changes" comment="Move command handle to class CommandExecutor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/CommandMatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/KitsuApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/KitsuApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/listeners/MessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/XmlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/utils/XmlUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sodini-template.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +203,8 @@
       <workItem from="1678243358285" duration="257000" />
       <workItem from="1678321652728" duration="13000" />
       <workItem from="1678322939397" duration="4285000" />
-      <workItem from="1678358387148" duration="2312000" />
+      <workItem from="1678358387148" duration="2497000" />
+      <workItem from="1678380143507" duration="3018000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize">
       <created>1674828446147</created>
@@ -325,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678171925340</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Move command handle to class CommandExecutor">
+      <created>1678360885818</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1678360885818</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +357,24 @@
     <MESSAGE value="Add Kitsu API client" />
     <MESSAGE value="Add trending manga API for Kitsu API client" />
     <MESSAGE value="Reformat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformat code" />
+    <MESSAGE value="Move command handle to class CommandExecutor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move command handle to class CommandExecutor" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tk/vnvna/sodini/modules/commands/PublicCommands.java</url>
+          <line>246</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.reflect.InvocationTargetException" memberName="stackTrace" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
