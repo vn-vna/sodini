@@ -36,7 +36,7 @@ dependencies {
     implementation(group = "org.glassfish.tyrus", name = "tyrus-client", version = "2.1.3")
     implementation(group = "org.glassfish.tyrus", name = "tyrus-container-grizzly-server", version = "2.1.3")
 
-    // SLF4J
+    // Log4J
     implementation(group = "org.apache.logging.log4j", name = "log4j-api", version = "2.1")
     implementation(group = "org.apache.logging.log4j", name = "log4j-core", version = "2.3.2")
     implementation(group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version = "2.1")
@@ -58,5 +58,6 @@ tasks.getByName<Test>("test") {
 }
 
 tasks.getByName<JavaCompile>("compileJava") {
+    // Use parameter's name
     options.compilerArgs.add("-parameters")
 }

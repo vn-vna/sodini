@@ -35,7 +35,8 @@ public class CommandMatcher {
         continue;
       }
 
-      var cmdExit = commandString.length() == commandEntry.getKey().length() || commandString.charAt(commandEntry.getKey().length()) == ' ';
+      var cmdExit = commandString.length() == commandEntry.getKey().length() ||
+        commandString.charAt(commandEntry.getKey().length()) == ' ';
 
       if (!cmdExit) {
         continue;

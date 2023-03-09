@@ -7,8 +7,6 @@ import tk.vnvna.sodini.controllers.annotations.AppModule;
 import tk.vnvna.sodini.utils.schemas.kitsune.KitsuTrendingSchema;
 
 import javax.json.JsonException;
-
-
 @AppModule
 public class KitsuApiClient {
   public KitsuTrendingSchema getTrendingAnime() {
